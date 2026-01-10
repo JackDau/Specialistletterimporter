@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Letter - GP Letter Review Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-link">← Back to Inbox</a>
+            <h1 class="logo">Specialist Letter Review</h1>
+            <div class="user-info">
+                <span class="user-name">Dr. Sarah Mitchell</span>
+                <span class="user-role">General Practitioner</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="patient-banner" id="patient-banner">
+        <!-- Patient info populated by JS -->
+    </div>
+
+    <main class="review-container">
+        <!-- Left Panel: PDF Viewer -->
+        <div class="pdf-panel">
+            <div class="panel-header">
+                <h2>Specialist Letter</h2>
+                <div class="pdf-controls">
+                    <button class="pdf-btn" id="zoom-out" title="Zoom Out">−</button>
+                    <span class="zoom-level" id="zoom-level">100%</span>
+                    <button class="pdf-btn" id="zoom-in" title="Zoom In">+</button>
+                </div>
+            </div>
+            <div class="pdf-viewer" id="pdf-viewer">
+                <iframe id="pdf-frame" src="" title="Specialist Letter PDF"></iframe>
+            </div>
+        </div>
+
+        <!-- Right Panel: Extracted Data -->
+        <div class="extraction-panel">
+            <div class="panel-header">
+                <h2>Extracted Information</h2>
+                <div class="panel-actions">
+                    <button class="btn btn-secondary" id="reject-all">Reject All</button>
+                    <button class="btn btn-primary" id="accept-all">Accept All</button>
+                </div>
+            </div>
+
+            <div class="extraction-content" id="extraction-content">
+                <!-- Letter Summary Section -->
+                <section class="extraction-section" data-section="summary">
+                    <div class="section-header">
+                        <h3>Letter Summary</h3>
+                        <div class="section-actions">
+                            <button class="action-btn accept" title="Accept"><span class="icon">✓</span></button>
+                            <button class="action-btn reject" title="Reject"><span class="icon">✕</span></button>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <textarea class="editable-field summary-field" id="summary-text" rows="4"></textarea>
+                    </div>
+                </section>
+
+                <!-- Diagnoses Section -->
+                <section class="extraction-section" data-section="diagnoses">
+                    <div class="section-header">
+                        <h3>Diagnoses / Conditions</h3>
+                    </div>
+                    <div class="section-content" id="diagnoses-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Medications Section -->
+                <section class="extraction-section" data-section="medications">
+                    <div class="section-header">
+                        <h3>Medications</h3>
+                    </div>
+                    <div class="section-content" id="medications-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Clinical Measurements Section -->
+                <section class="extraction-section" data-section="measurements">
+                    <div class="section-header">
+                        <h3>Clinical Measurements</h3>
+                    </div>
+                    <div class="section-content" id="measurements-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Allergies Section -->
+                <section class="extraction-section" data-section="allergies">
+                    <div class="section-header">
+                        <h3>Allergies</h3>
+                    </div>
+                    <div class="section-content" id="allergies-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Reminders Section -->
+                <section class="extraction-section" data-section="reminders">
+                    <div class="section-header">
+                        <h3>Reminders / Follow-up</h3>
+                    </div>
+                    <div class="section-content" id="reminders-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Submit Actions -->
+            <div class="submit-actions">
+                <div class="submit-summary">
+                    <span id="accepted-count">0</span> items accepted
+                </div>
+                <button class="btn btn-large btn-primary" id="submit-all">
+                    Submit to Patient Record
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-icon success">✓</div>
+            <h2>Successfully Updated</h2>
+            <p>Patient record has been updated with the approved information.</p>
+            <button class="btn btn-primary" onclick="window.location.href='index.html'">
+                Return to Inbox
+            </button>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/review.js"></script>
+</body>
+</html>

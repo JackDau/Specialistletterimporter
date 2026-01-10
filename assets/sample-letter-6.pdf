@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specialist Letter</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.6; padding: 40px 50px; background: white; color: #333; max-width: 210mm; margin: 0 auto; }
+        .letterhead { text-align: center; border-bottom: 2px solid #be185d; padding-bottom: 20px; margin-bottom: 30px; }
+        .letterhead h1 { color: #be185d; font-size: 18pt; margin-bottom: 5px; }
+        .letterhead .subtitle { color: #4a5568; font-size: 11pt; }
+        .letterhead .contact { font-size: 9pt; color: #718096; margin-top: 10px; }
+        .letter-info { margin-bottom: 25px; }
+        .recipient { margin-bottom: 25px; }
+        .recipient p { margin-bottom: 2px; }
+        .salutation { margin-bottom: 20px; }
+        .patient-box { background: #f7fafc; border: 1px solid #e2e8f0; padding: 15px; margin-bottom: 20px; }
+        .patient-box h3 { font-size: 11pt; color: #be185d; margin-bottom: 10px; text-transform: uppercase; }
+        .patient-box table { width: 100%; font-size: 10pt; }
+        .patient-box td { padding: 2px 10px 2px 0; }
+        .patient-box td:first-child { font-weight: bold; width: 120px; }
+        .content p { margin-bottom: 15px; text-align: justify; }
+        .content h4 { color: #be185d; margin-top: 20px; margin-bottom: 10px; font-size: 11pt; }
+        .content ul { margin-left: 25px; margin-bottom: 15px; }
+        .content li { margin-bottom: 5px; }
+        .highlight-box { background: #fdf2f8; border: 1px solid #ec4899; padding: 15px; margin: 15px 0; }
+        .results-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10pt; }
+        .results-table th, .results-table td { border: 1px solid #e2e8f0; padding: 8px; text-align: left; }
+        .results-table th { background: #f7fafc; }
+        .results-table .abnormal { color: #dc2626; font-weight: bold; }
+        .signature { margin-top: 40px; }
+        .signature .name { font-weight: bold; }
+        .signature .credentials { font-size: 10pt; color: #4a5568; }
+    </style>
+</head>
+<body>
+    <div class="letterhead">
+        <h1>WOMEN'S HEALTH & MATERNITY</h1>
+        <div class="subtitle">Obstetrics & Gynaecology</div>
+        <div class="contact">Royal Women's Hospital | 20 Flemington Road, Parkville VIC 3052<br>Phone: (03) 8345 2000</div>
+    </div>
+
+    <div class="letter-info"><p class="date">6 January 2026</p></div>
+
+    <div class="recipient">
+        <p><strong>Dr Sarah Mitchell</strong></p>
+        <p>Mitchell Family Practice</p>
+        <p>45 Clinic Road, Suburb VIC 3000</p>
+    </div>
+
+    <div class="salutation"><p>Dear Dr Mitchell,</p></div>
+
+    <div class="patient-box">
+        <h3>Patient Information</h3>
+        <table>
+            <tr><td>Patient Name:</td><td>Anika PATEL</td></tr>
+            <tr><td>Date of Birth:</td><td>03/12/1990 (35 years)</td></tr>
+            <tr><td>UR Number:</td><td>MRN-4928371</td></tr>
+            <tr><td>Gestation:</td><td>28+0 weeks</td></tr>
+            <tr><td>EDD:</td><td>28 March 2026</td></tr>
+            <tr><td>Date of Review:</td><td>6 January 2026</td></tr>
+        </table>
+    </div>
+
+    <div class="content">
+        <p>I reviewed Ms Patel today for routine antenatal care. This is her first pregnancy (G1P0) and care has been uncomplicated until the 28-week oral glucose tolerance test.</p>
+
+        <h4>Current Pregnancy Summary</h4>
+        <p>Ms Patel has had an otherwise uncomplicated pregnancy. First trimester screening was low risk, and morphology ultrasound at 20 weeks was normal with no structural abnormalities identified.</p>
+
+        <div class="highlight-box">
+            <h4 style="margin-top: 0; color: #be185d;">New Diagnosis: Gestational Diabetes Mellitus</h4>
+            <p style="margin-bottom: 0;">The 75g OGTT performed on 5 January 2026 is diagnostic for gestational diabetes:</p>
+        </div>
+
+        <table class="results-table">
+            <tr><th>Time Point</th><th>Result</th><th>Diagnostic Threshold</th></tr>
+            <tr><td>Fasting glucose</td><td class="abnormal">5.8 mmol/L</td><td>≥ 5.1 mmol/L</td></tr>
+            <tr><td>1-hour glucose</td><td>9.5 mmol/L</td><td>≥ 10.0 mmol/L</td></tr>
+            <tr><td>2-hour glucose</td><td class="abnormal">9.2 mmol/L</td><td>≥ 8.5 mmol/L</td></tr>
+        </table>
+
+        <h4>Examination Today</h4>
+        <ul>
+            <li>Blood pressure: 118/72 mmHg</li>
+            <li>Weight: 68.5 kg (pre-pregnancy 62 kg)</li>
+            <li>Fundal height: 28 cm (appropriate for dates)</li>
+            <li>Fetal heart rate: 145 bpm, regular</li>
+            <li>No peripheral oedema</li>
+        </ul>
+
+        <h4>Management Plan</h4>
+        <ul>
+            <li>Dietary management for GDM - counselling provided today</li>
+            <li>Home blood glucose monitoring initiated (fasting + 2hr post-prandial)</li>
+            <li>Referral to diabetes educator - appointment in 1 week</li>
+            <li>Growth ultrasound at 32 weeks</li>
+            <li>Fortnightly antenatal visits from now</li>
+        </ul>
+
+        <h4>Shared Care Requests</h4>
+        <p>Please continue shared antenatal care. If blood glucose targets are not met with dietary management alone (fasting < 5.0, 2hr post-prandial < 6.7), please contact our clinic to discuss insulin therapy.</p>
+
+        <h4>Postnatal</h4>
+        <p>Ms Patel will require a repeat 75g OGTT at 6-12 weeks postpartum to screen for persistent diabetes. Please arrange this after delivery.</p>
+    </div>
+
+    <div class="signature">
+        <p class="name">Dr Jennifer Wu</p>
+        <p class="credentials">MBBS, FRANZCOG</p>
+        <p class="credentials">Consultant Obstetrician</p>
+    </div>
+</body>
+</html>

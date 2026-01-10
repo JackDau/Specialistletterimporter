@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GP Letter Review Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">Specialist Letter Review</h1>
+            <div class="user-info">
+                <span class="user-name">Dr. Sarah Mitchell</span>
+                <span class="user-role">General Practitioner</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="inbox-container">
+            <div class="inbox-header">
+                <h2>Inbox</h2>
+                <div class="inbox-stats">
+                    <span class="stat urgent"><span class="stat-count" id="urgent-count">0</span> Urgent</span>
+                    <span class="stat routine"><span class="stat-count" id="routine-count">0</span> Routine</span>
+                </div>
+            </div>
+
+            <div class="inbox-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="urgent">Urgent</button>
+                <button class="filter-btn" data-filter="routine">Routine</button>
+            </div>
+
+            <div class="letter-list" id="letter-list">
+                <!-- Letters will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

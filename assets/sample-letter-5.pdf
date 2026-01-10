@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specialist Letter</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.6; padding: 40px 50px; background: white; color: #333; max-width: 210mm; margin: 0 auto; }
+        .letterhead { text-align: center; border-bottom: 2px solid #0369a1; padding-bottom: 20px; margin-bottom: 30px; }
+        .letterhead h1 { color: #0369a1; font-size: 18pt; margin-bottom: 5px; }
+        .letterhead .subtitle { color: #4a5568; font-size: 11pt; }
+        .letterhead .contact { font-size: 9pt; color: #718096; margin-top: 10px; }
+        .letter-info { margin-bottom: 25px; }
+        .recipient { margin-bottom: 25px; }
+        .recipient p { margin-bottom: 2px; }
+        .salutation { margin-bottom: 20px; }
+        .patient-box { background: #f7fafc; border: 1px solid #e2e8f0; padding: 15px; margin-bottom: 20px; }
+        .patient-box h3 { font-size: 11pt; color: #0369a1; margin-bottom: 10px; text-transform: uppercase; }
+        .patient-box table { width: 100%; font-size: 10pt; }
+        .patient-box td { padding: 2px 10px 2px 0; }
+        .patient-box td:first-child { font-weight: bold; width: 120px; }
+        .content p { margin-bottom: 15px; text-align: justify; }
+        .content h4 { color: #0369a1; margin-top: 20px; margin-bottom: 10px; font-size: 11pt; }
+        .content ul { margin-left: 25px; margin-bottom: 15px; }
+        .content li { margin-bottom: 5px; }
+        .sensitive-box { background: #fef3c7; border: 1px solid #d97706; padding: 15px; margin: 15px 0; }
+        .sensitive-box h4 { color: #92400e; margin-top: 0; }
+        .signature { margin-top: 40px; }
+        .signature .name { font-weight: bold; }
+        .signature .credentials { font-size: 10pt; color: #4a5568; }
+    </style>
+</head>
+<body>
+    <div class="letterhead">
+        <h1>MEMORY & COGNITIVE HEALTH CLINIC</h1>
+        <div class="subtitle">Geriatric Medicine & Dementia Services</div>
+        <div class="contact">Royal Melbourne Hospital | Grattan Street, Parkville VIC 3050<br>Phone: (03) 9342 7000</div>
+    </div>
+
+    <div class="letter-info"><p class="date">6 January 2026</p></div>
+
+    <div class="recipient">
+        <p><strong>Dr Sarah Mitchell</strong></p>
+        <p>Mitchell Family Practice</p>
+        <p>45 Clinic Road, Suburb VIC 3000</p>
+    </div>
+
+    <div class="salutation"><p>Dear Dr Mitchell,</p></div>
+
+    <div class="patient-box">
+        <h3>Patient Information</h3>
+        <table>
+            <tr><td>Patient Name:</td><td>Thi NGUYEN</td></tr>
+            <tr><td>Date of Birth:</td><td>14/09/1945 (80 years)</td></tr>
+            <tr><td>UR Number:</td><td>MRN-1847263</td></tr>
+            <tr><td>Date of Review:</td><td>6 January 2026</td></tr>
+        </table>
+    </div>
+
+    <div class="content">
+        <p>Thank you for referring Mrs Nguyen to our Memory Clinic for assessment of cognitive concerns. I reviewed her today with her daughter who is her primary carer.</p>
+
+        <h4>History</h4>
+        <p>Mrs Nguyen's daughter reports a 2-year history of progressive memory decline, initially attributed to normal ageing. Over the past 6 months, there have been more concerning symptoms including repetitive questioning, difficulty managing medications, and getting lost on familiar routes. Mrs Nguyen retains insight into her difficulties and expressed distress about her memory.</p>
+
+        <h4>Cognitive Assessment</h4>
+        <p>Formal cognitive testing today:</p>
+        <ul>
+            <li>Mini-Mental State Examination (MMSE): 22/30</li>
+            <li>Significant deficits in delayed recall (0/3) and orientation to time</li>
+            <li>Clock drawing test: mild impairment</li>
+        </ul>
+
+        <h4>Investigations</h4>
+        <p>MRI brain (performed 20/12/2025) shows bilateral hippocampal atrophy (Scheltens grade 2) with mild generalised cortical atrophy. No significant vascular changes. These findings are consistent with early Alzheimer's disease pathology.</p>
+
+        <div class="sensitive-box">
+            <h4>Diagnosis Discussion</h4>
+            <p>Following comprehensive assessment, I have diagnosed Mrs Nguyen with <strong>Mild Cognitive Impairment due to Alzheimer's Disease</strong>. A family meeting was held to discuss the diagnosis, prognosis, and management options. Advance care planning was introduced and the family will consider this further.</p>
+        </div>
+
+        <h4>Medication Changes</h4>
+        <ul>
+            <li><strong>Donepezil 5mg nocte</strong> - COMMENCED. Increase to 10mg after 4 weeks if tolerated</li>
+            <li><strong>Amlodipine 5mg daily</strong> - CEASED due to peripheral oedema</li>
+            <li><strong>Lercanidipine 10mg daily</strong> - NEW, replacement antihypertensive</li>
+        </ul>
+
+        <h4>Recommendations</h4>
+        <ul>
+            <li>Memory Clinic follow-up in 3 months</li>
+            <li>Repeat cognitive assessment in 6 months</li>
+            <li>Advance Care Directive discussion at next GP visit</li>
+            <li>Consider referral to Dementia Support Australia if behavioural symptoms emerge</li>
+            <li>Driving assessment may be required - please monitor</li>
+        </ul>
+    </div>
+
+    <div class="signature">
+        <p class="name">Dr Robert Clarke</p>
+        <p class="credentials">MBBS, FRACP</p>
+        <p class="credentials">Consultant Geriatrician</p>
+    </div>
+</body>
+</html>

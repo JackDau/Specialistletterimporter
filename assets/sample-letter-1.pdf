@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specialist Letter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.6;
+            padding: 40px 50px;
+            background: white;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+        .letterhead {
+            text-align: center;
+            border-bottom: 2px solid #1a365d;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .letterhead h1 {
+            color: #1a365d;
+            font-size: 18pt;
+            margin-bottom: 5px;
+        }
+        .letterhead .subtitle {
+            color: #4a5568;
+            font-size: 11pt;
+        }
+        .letterhead .contact {
+            font-size: 9pt;
+            color: #718096;
+            margin-top: 10px;
+        }
+        .letter-info {
+            margin-bottom: 25px;
+        }
+        .letter-info p {
+            margin-bottom: 3px;
+        }
+        .letter-info .date {
+            margin-bottom: 15px;
+        }
+        .recipient {
+            margin-bottom: 25px;
+        }
+        .recipient p {
+            margin-bottom: 2px;
+        }
+        .salutation {
+            margin-bottom: 20px;
+        }
+        .patient-box {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .patient-box h3 {
+            font-size: 11pt;
+            color: #1a365d;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .patient-box table {
+            width: 100%;
+            font-size: 10pt;
+        }
+        .patient-box td {
+            padding: 2px 10px 2px 0;
+        }
+        .patient-box td:first-child {
+            font-weight: bold;
+            width: 120px;
+        }
+        .content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .content h4 {
+            color: #1a365d;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 11pt;
+        }
+        .content ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        .content li {
+            margin-bottom: 5px;
+        }
+        .signature {
+            margin-top: 40px;
+        }
+        .signature img {
+            height: 50px;
+            margin-bottom: 5px;
+        }
+        .signature .name {
+            font-weight: bold;
+        }
+        .signature .credentials {
+            font-size: 10pt;
+            color: #4a5568;
+        }
+        .cc {
+            margin-top: 30px;
+            font-size: 10pt;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="letterhead">
+        <h1>CARDIOLOGY ASSOCIATES</h1>
+        <div class="subtitle">Specialist Cardiovascular Care</div>
+        <div class="contact">
+            Level 5, Medical Centre | 123 Health Street, Melbourne VIC 3000<br>
+            Phone: (03) 9555 1234 | Fax: (03) 9555 1235 | Email: admin@cardiologyassociates.com.au
+        </div>
+    </div>
+
+    <div class="letter-info">
+        <p class="date">8 January 2026</p>
+    </div>
+
+    <div class="recipient">
+        <p><strong>Dr Sarah Mitchell</strong></p>
+        <p>Mitchell Family Practice</p>
+        <p>45 Clinic Road</p>
+        <p>Suburb VIC 3000</p>
+    </div>
+
+    <div class="salutation">
+        <p>Dear Dr Mitchell,</p>
+    </div>
+
+    <div class="patient-box">
+        <h3>Patient Information</h3>
+        <table>
+            <tr>
+                <td>Patient Name:</td>
+                <td>Margaret ANDERSON</td>
+            </tr>
+            <tr>
+                <td>Date of Birth:</td>
+                <td>15/03/1958 (67 years)</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>78 Residential Ave, Suburb VIC 3000</td>
+            </tr>
+            <tr>
+                <td>UR Number:</td>
+                <td>MRN-2847561</td>
+            </tr>
+            <tr>
+                <td>Date of Review:</td>
+                <td>8 January 2026</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="content">
+        <p>Thank you for referring Mrs Anderson for cardiology review following her recent hospital admission. I reviewed her in my rooms today and provide the following summary.</p>
+
+        <h4>Presenting History</h4>
+        <p>Mrs Anderson was admitted to the Royal Melbourne Hospital on 28 December 2025 with chest pain and troponin elevation consistent with acute coronary syndrome. She underwent coronary angiography on 30 December which revealed significant three-vessel coronary artery disease with 80% stenosis of the LAD, 70% stenosis of the circumflex, and 75% stenosis of the RCA.</p>
+
+        <h4>Current Medications</h4>
+        <ul>
+            <li>Aspirin 100mg daily (NEW)</li>
+            <li>Ticagrelor 90mg twice daily (NEW)</li>
+            <li>Atorvastatin 80mg nocte (INCREASED from 40mg)</li>
+            <li>Perindopril 10mg daily (INCREASED from 5mg)</li>
+            <li>Metoprolol CR 95mg daily (NEW)</li>
+        </ul>
+
+        <h4>Examination Findings</h4>
+        <p>On examination today, her blood pressure was 158/94 mmHg and heart rate 72 bpm. Weight was 78.5kg. Her blood pressure remains suboptimally controlled despite the increase in Perindopril. I note she previously experienced a dry cough with Ramipril but is tolerating Perindopril well.</p>
+
+        <h4>Investigations</h4>
+        <p>Recent lipid studies show LDL cholesterol of 3.2 mmol/L which remains above target. Echocardiogram performed during admission showed preserved left ventricular function with an ejection fraction of 55%.</p>
+
+        <h4>Management Plan</h4>
+        <p>Given the extent of her coronary artery disease, I have referred Mrs Anderson to the cardiothoracic surgical team for consideration of coronary artery bypass grafting. She has an appointment within the next two weeks.</p>
+
+        <p>In the interim, please continue her current dual antiplatelet therapy. She should avoid any elective procedures or dental work until reviewed by the surgical team.</p>
+
+        <h4>Recommended Follow-up</h4>
+        <ul>
+            <li>Cardiac surgery consultation - within 2 weeks</li>
+            <li>Repeat echocardiogram in 3 months</li>
+            <li>Cardiology follow-up 6 weeks post-surgery</li>
+        </ul>
+
+        <p>Please do not hesitate to contact my rooms if you have any questions or concerns regarding Mrs Anderson's care.</p>
+    </div>
+
+    <div class="signature">
+        <p class="name">Dr James Chen</p>
+        <p class="credentials">MBBS, FRACP, FCSANZ</p>
+        <p class="credentials">Consultant Cardiologist</p>
+    </div>
+
+    <div class="cc">
+        <p>CC: Patient</p>
+    </div>
+</body>
+</html>

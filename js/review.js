@@ -118,9 +118,17 @@ function renderDiagnoses(diagnoses) {
                 </button>
             </div>
             <div class="item-content">
-                <div class="item-label">
-                    ${d.name}
-                    <span class="item-tag ${d.status}">${d.status}</span>
+                ${d.currentRecord ? `
+                    <div class="current-record">
+                        <span class="record-label">Current:</span> ${d.currentRecord}
+                    </div>
+                ` : ''}
+                <div class="proposed-change">
+                    <span class="record-label">${d.currentRecord ? 'Proposed:' : ''}</span>
+                    <span class="item-label">
+                        ${d.name}
+                        <span class="item-tag ${d.status}">${d.status}</span>
+                    </span>
                 </div>
                 <div class="item-value">ICD-10: ${d.icd10}</div>
                 <div class="item-edit">
@@ -150,13 +158,19 @@ function renderMedications(medications) {
                 </button>
             </div>
             <div class="item-content">
-                <div class="item-label">
-                    ${m.name} ${m.dose}
-                    <span class="item-tag ${m.status}">${m.status}</span>
+                ${m.currentRecord ? `
+                    <div class="current-record">
+                        <span class="record-label">Current:</span> ${m.currentRecord}
+                    </div>
+                ` : ''}
+                <div class="proposed-change">
+                    <span class="record-label">${m.currentRecord ? 'Proposed:' : ''}</span>
+                    <span class="item-label">
+                        ${m.name} ${m.dose} ${m.frequency}
+                        <span class="item-tag ${m.status}">${m.status}</span>
+                    </span>
                 </div>
-                <div class="item-value">
-                    ${m.frequency}${m.note ? ` • ${m.note}` : ''}
-                </div>
+                ${m.note ? `<div class="item-value">${m.note}</div>` : ''}
                 <div class="item-edit">
                     <input type="text" value="${m.name} ${m.dose} ${m.frequency}" placeholder="Edit medication">
                 </div>
@@ -185,7 +199,16 @@ function renderMeasurements(measurements) {
             </div>
             <div class="item-content">
                 <div class="item-label">${m.name}</div>
-                <div class="item-value">${m.value} ${m.unit} (${m.date})</div>
+                ${m.currentRecord ? `
+                    <div class="current-record">
+                        <span class="record-label">Current:</span> ${m.currentRecord}
+                    </div>
+                ` : ''}
+                <div class="proposed-change">
+                    <span class="record-label">${m.currentRecord ? 'New:' : ''}</span>
+                    <span class="proposed-value">${m.value} ${m.unit}</span>
+                    <span class="measurement-date">(${m.date})</span>
+                </div>
                 <div class="item-edit">
                     <input type="text" value="${m.value}" placeholder="Edit value">
                 </div>
@@ -213,11 +236,19 @@ function renderAllergies(allergies) {
                 </button>
             </div>
             <div class="item-content">
-                <div class="item-label">
-                    ${a.name}
-                    <span class="item-tag ${a.status}">${a.status}</span>
+                ${a.currentRecord ? `
+                    <div class="current-record">
+                        <span class="record-label">Current:</span> ${a.currentRecord}
+                    </div>
+                ` : ''}
+                <div class="proposed-change">
+                    <span class="record-label">${a.currentRecord ? 'Proposed:' : ''}</span>
+                    <span class="item-label">
+                        ${a.name}
+                        <span class="item-tag ${a.status}">${a.status}</span>
+                    </span>
                 </div>
-                <div class="item-value">${a.reaction}</div>
+                <div class="item-value">Reaction: ${a.reaction}</div>
                 <div class="item-edit">
                     <input type="text" value="${a.name}" placeholder="Edit allergy">
                 </div>

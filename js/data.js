@@ -10,29 +10,29 @@ const mockLetters = [
         speciality: "Cardiology",
         dateReceived: "2026-01-09",
         urgency: "urgent",
-        pdfFile: "assets/sample-letter-1.pdf",
+        pdfFile: "assets/sample-letter-1.html",
         extractedData: {
             summary: "Mrs. Anderson was reviewed following her recent admission for acute coronary syndrome. Coronary angiography revealed significant three-vessel disease. She has been commenced on dual antiplatelet therapy and referred for cardiac surgery consultation. Blood pressure remains suboptimally controlled despite current medications.",
             diagnoses: [
-                { id: 1, name: "Three-vessel coronary artery disease", status: "new", icd10: "I25.10" },
-                { id: 2, name: "Acute coronary syndrome", status: "new", icd10: "I24.9" },
-                { id: 3, name: "Hypertension - poorly controlled", status: "changed", icd10: "I10" }
+                { id: 1, name: "Three-vessel coronary artery disease", status: "new", icd10: "I25.10", currentRecord: null },
+                { id: 2, name: "Acute coronary syndrome", status: "new", icd10: "I24.9", currentRecord: null },
+                { id: 3, name: "Hypertension - poorly controlled", status: "changed", icd10: "I10", currentRecord: "Hypertension" }
             ],
             medications: [
-                { id: 1, name: "Aspirin", dose: "100mg", frequency: "daily", status: "new" },
-                { id: 2, name: "Ticagrelor", dose: "90mg", frequency: "twice daily", status: "new" },
-                { id: 3, name: "Atorvastatin", dose: "80mg", frequency: "nocte", status: "changed", note: "Increased from 40mg" },
-                { id: 4, name: "Perindopril", dose: "10mg", frequency: "daily", status: "changed", note: "Increased from 5mg" },
-                { id: 5, name: "Metoprolol CR", dose: "95mg", frequency: "daily", status: "new" }
+                { id: 1, name: "Aspirin", dose: "100mg", frequency: "daily", status: "new", currentRecord: null },
+                { id: 2, name: "Ticagrelor", dose: "90mg", frequency: "twice daily", status: "new", currentRecord: null },
+                { id: 3, name: "Atorvastatin", dose: "80mg", frequency: "nocte", status: "changed", note: "Increased from 40mg", currentRecord: "Atorvastatin 40mg nocte" },
+                { id: 4, name: "Perindopril", dose: "10mg", frequency: "daily", status: "changed", note: "Increased from 5mg", currentRecord: "Perindopril 5mg daily" },
+                { id: 5, name: "Metoprolol CR", dose: "95mg", frequency: "daily", status: "new", currentRecord: null }
             ],
             measurements: [
-                { id: 1, name: "Blood Pressure", value: "158/94", unit: "mmHg", date: "08/01/2026" },
-                { id: 2, name: "Heart Rate", value: "72", unit: "bpm", date: "08/01/2026" },
-                { id: 3, name: "Weight", value: "78.5", unit: "kg", date: "08/01/2026" },
-                { id: 4, name: "LDL Cholesterol", value: "3.2", unit: "mmol/L", date: "06/01/2026" }
+                { id: 1, name: "Blood Pressure", value: "158/94", unit: "mmHg", date: "08/01/2026", currentRecord: "145/88 mmHg (12/11/2025)" },
+                { id: 2, name: "Heart Rate", value: "72", unit: "bpm", date: "08/01/2026", currentRecord: "76 bpm (12/11/2025)" },
+                { id: 3, name: "Weight", value: "78.5", unit: "kg", date: "08/01/2026", currentRecord: "77.2 kg (12/11/2025)" },
+                { id: 4, name: "LDL Cholesterol", value: "3.2", unit: "mmol/L", date: "06/01/2026", currentRecord: "2.8 mmol/L (15/09/2025)" }
             ],
             allergies: [
-                { id: 1, name: "ACE inhibitor-induced cough", reaction: "Dry cough with Ramipril - tolerating Perindopril", status: "new" }
+                { id: 1, name: "ACE inhibitor-induced cough", reaction: "Dry cough with Ramipril - tolerating Perindopril", status: "new", currentRecord: null }
             ],
             reminders: [
                 { id: 1, description: "Cardiac surgery consultation", dueDate: "Within 2 weeks", type: "referral" },
@@ -50,18 +50,18 @@ const mockLetters = [
         speciality: "Gastroenterology",
         dateReceived: "2026-01-09",
         urgency: "routine",
-        pdfFile: "assets/sample-letter-2.pdf",
+        pdfFile: "assets/sample-letter-2.html",
         extractedData: {
             summary: "Mr. Brown underwent surveillance colonoscopy which revealed two tubular adenomas in the sigmoid colon, both successfully removed. No evidence of malignancy on histopathology. Continue current PPI therapy for Barrett's oesophagus. Recommend repeat colonoscopy in 3 years.",
             diagnoses: [
-                { id: 1, name: "Colonic tubular adenomas - removed", status: "new", icd10: "D12.5" },
-                { id: 2, name: "Barrett's oesophagus - stable", status: "changed", icd10: "K22.7" }
+                { id: 1, name: "Colonic tubular adenomas - removed", status: "new", icd10: "D12.5", currentRecord: null },
+                { id: 2, name: "Barrett's oesophagus - stable", status: "changed", icd10: "K22.7", currentRecord: "Barrett's oesophagus" }
             ],
             medications: [
-                { id: 1, name: "Esomeprazole", dose: "40mg", frequency: "daily", status: "unchanged", note: "Continue current therapy" }
+                { id: 1, name: "Esomeprazole", dose: "40mg", frequency: "daily", status: "unchanged", note: "Continue current therapy", currentRecord: "Esomeprazole 40mg daily" }
             ],
             measurements: [
-                { id: 1, name: "Weight", value: "92.3", unit: "kg", date: "07/01/2026" }
+                { id: 1, name: "Weight", value: "92.3", unit: "kg", date: "07/01/2026", currentRecord: "91.8 kg (20/10/2025)" }
             ],
             allergies: [],
             reminders: [
@@ -79,26 +79,26 @@ const mockLetters = [
         speciality: "Endocrinology",
         dateReceived: "2026-01-08",
         urgency: "urgent",
-        pdfFile: "assets/sample-letter-3.pdf",
+        pdfFile: "assets/sample-letter-3.html",
         extractedData: {
             summary: "Ms. Chen presents with newly diagnosed Type 2 Diabetes Mellitus with HbA1c of 9.2%. She also has concurrent hyperthyroidism secondary to Graves' disease. Started on Metformin and Carbimazole. Requires close monitoring of thyroid function and glycaemic control. Diabetes education arranged.",
             diagnoses: [
-                { id: 1, name: "Type 2 Diabetes Mellitus", status: "new", icd10: "E11.9" },
-                { id: 2, name: "Graves' disease with hyperthyroidism", status: "new", icd10: "E05.0" }
+                { id: 1, name: "Type 2 Diabetes Mellitus", status: "new", icd10: "E11.9", currentRecord: null },
+                { id: 2, name: "Graves' disease with hyperthyroidism", status: "new", icd10: "E05.0", currentRecord: null }
             ],
             medications: [
-                { id: 1, name: "Metformin", dose: "500mg", frequency: "twice daily", status: "new", note: "Titrate to 1000mg BD over 4 weeks" },
-                { id: 2, name: "Carbimazole", dose: "20mg", frequency: "daily", status: "new" }
+                { id: 1, name: "Metformin", dose: "500mg", frequency: "twice daily", status: "new", note: "Titrate to 1000mg BD over 4 weeks", currentRecord: null },
+                { id: 2, name: "Carbimazole", dose: "20mg", frequency: "daily", status: "new", currentRecord: null }
             ],
             measurements: [
-                { id: 1, name: "HbA1c", value: "9.2", unit: "%", date: "05/01/2026" },
-                { id: 2, name: "TSH", value: "<0.01", unit: "mIU/L", date: "05/01/2026" },
-                { id: 3, name: "Free T4", value: "42", unit: "pmol/L", date: "05/01/2026" },
-                { id: 4, name: "Weight", value: "58.2", unit: "kg", date: "06/01/2026" },
-                { id: 5, name: "Blood Pressure", value: "128/82", unit: "mmHg", date: "06/01/2026" }
+                { id: 1, name: "HbA1c", value: "9.2", unit: "%", date: "05/01/2026", currentRecord: "Not previously recorded" },
+                { id: 2, name: "TSH", value: "<0.01", unit: "mIU/L", date: "05/01/2026", currentRecord: "2.1 mIU/L (03/06/2025)" },
+                { id: 3, name: "Free T4", value: "42", unit: "pmol/L", date: "05/01/2026", currentRecord: "14 pmol/L (03/06/2025)" },
+                { id: 4, name: "Weight", value: "58.2", unit: "kg", date: "06/01/2026", currentRecord: "63.1 kg (03/06/2025)" },
+                { id: 5, name: "Blood Pressure", value: "128/82", unit: "mmHg", date: "06/01/2026", currentRecord: "122/78 mmHg (03/06/2025)" }
             ],
             allergies: [
-                { id: 1, name: "Sulfonamides", reaction: "Rash", status: "new" }
+                { id: 1, name: "Sulfonamides", reaction: "Rash", status: "new", currentRecord: null }
             ],
             reminders: [
                 { id: 1, description: "Thyroid function tests", dueDate: "4 weeks", type: "investigation" },
@@ -117,21 +117,21 @@ const mockLetters = [
         speciality: "Rheumatology",
         dateReceived: "2026-01-08",
         urgency: "routine",
-        pdfFile: "assets/sample-letter-4.pdf",
+        pdfFile: "assets/sample-letter-4.html",
         extractedData: {
             summary: "Mr. Martinez reviewed for management of rheumatoid arthritis. Disease activity remains well controlled on current DMARD therapy. DAS28 score 2.4 indicating remission. Continue current medications. Annual monitoring bloods satisfactory.",
             diagnoses: [
-                { id: 1, name: "Rheumatoid arthritis - in remission", status: "changed", icd10: "M06.9" }
+                { id: 1, name: "Rheumatoid arthritis - in remission", status: "changed", icd10: "M06.9", currentRecord: "Rheumatoid arthritis" }
             ],
             medications: [
-                { id: 1, name: "Methotrexate", dose: "20mg", frequency: "weekly", status: "unchanged" },
-                { id: 2, name: "Folic acid", dose: "5mg", frequency: "weekly (day after MTX)", status: "unchanged" },
-                { id: 3, name: "Hydroxychloroquine", dose: "200mg", frequency: "daily", status: "unchanged" }
+                { id: 1, name: "Methotrexate", dose: "20mg", frequency: "weekly", status: "unchanged", currentRecord: "Methotrexate 20mg weekly" },
+                { id: 2, name: "Folic acid", dose: "5mg", frequency: "weekly (day after MTX)", status: "unchanged", currentRecord: "Folic acid 5mg weekly" },
+                { id: 3, name: "Hydroxychloroquine", dose: "200mg", frequency: "daily", status: "unchanged", currentRecord: "Hydroxychloroquine 200mg daily" }
             ],
             measurements: [
-                { id: 1, name: "DAS28 Score", value: "2.4", unit: "", date: "07/01/2026" },
-                { id: 2, name: "CRP", value: "3", unit: "mg/L", date: "07/01/2026" },
-                { id: 3, name: "ESR", value: "12", unit: "mm/hr", date: "07/01/2026" }
+                { id: 1, name: "DAS28 Score", value: "2.4", unit: "", date: "07/01/2026", currentRecord: "2.8 (15/07/2025)" },
+                { id: 2, name: "CRP", value: "3", unit: "mg/L", date: "07/01/2026", currentRecord: "5 mg/L (15/07/2025)" },
+                { id: 3, name: "ESR", value: "12", unit: "mm/hr", date: "07/01/2026", currentRecord: "18 mm/hr (15/07/2025)" }
             ],
             allergies: [],
             reminders: [
@@ -149,21 +149,21 @@ const mockLetters = [
         speciality: "Geriatric Medicine",
         dateReceived: "2026-01-07",
         urgency: "routine",
-        pdfFile: "assets/sample-letter-5.pdf",
+        pdfFile: "assets/sample-letter-5.html",
         extractedData: {
             summary: "Mrs. Nguyen reviewed in Memory Clinic. Cognitive testing reveals mild cognitive impairment, likely early Alzheimer's disease. MRI shows mild hippocampal atrophy. Commenced on cholinesterase inhibitor therapy. Family meeting held to discuss diagnosis and advance care planning.",
             diagnoses: [
-                { id: 1, name: "Mild cognitive impairment due to Alzheimer's disease", status: "new", icd10: "G31.84" }
+                { id: 1, name: "Mild cognitive impairment due to Alzheimer's disease", status: "new", icd10: "G31.84", currentRecord: null }
             ],
             medications: [
-                { id: 1, name: "Donepezil", dose: "5mg", frequency: "nocte", status: "new", note: "Increase to 10mg after 4 weeks if tolerated" },
-                { id: 2, name: "Amlodipine", dose: "5mg", frequency: "daily", status: "ceased", note: "Ceased due to peripheral oedema" },
-                { id: 3, name: "Lercanidipine", dose: "10mg", frequency: "daily", status: "new", note: "Replacement for Amlodipine" }
+                { id: 1, name: "Donepezil", dose: "5mg", frequency: "nocte", status: "new", note: "Increase to 10mg after 4 weeks if tolerated", currentRecord: null },
+                { id: 2, name: "Amlodipine", dose: "5mg", frequency: "daily", status: "ceased", note: "Ceased due to peripheral oedema", currentRecord: "Amlodipine 5mg daily (ACTIVE)" },
+                { id: 3, name: "Lercanidipine", dose: "10mg", frequency: "daily", status: "new", note: "Replacement for Amlodipine", currentRecord: null }
             ],
             measurements: [
-                { id: 1, name: "MMSE Score", value: "22/30", unit: "", date: "06/01/2026" },
-                { id: 2, name: "Blood Pressure", value: "142/78", unit: "mmHg", date: "06/01/2026" },
-                { id: 3, name: "Weight", value: "52.1", unit: "kg", date: "06/01/2026" }
+                { id: 1, name: "MMSE Score", value: "22/30", unit: "", date: "06/01/2026", currentRecord: "26/30 (10/01/2025)" },
+                { id: 2, name: "Blood Pressure", value: "142/78", unit: "mmHg", date: "06/01/2026", currentRecord: "138/82 mmHg (10/01/2025)" },
+                { id: 3, name: "Weight", value: "52.1", unit: "kg", date: "06/01/2026", currentRecord: "54.3 kg (10/01/2025)" }
             ],
             allergies: [],
             reminders: [
@@ -182,20 +182,20 @@ const mockLetters = [
         speciality: "Obstetrics",
         dateReceived: "2026-01-07",
         urgency: "routine",
-        pdfFile: "assets/sample-letter-6.pdf",
+        pdfFile: "assets/sample-letter-6.html",
         extractedData: {
             summary: "Ms. Patel attended for routine antenatal care at 28 weeks gestation. Pregnancy progressing normally. Oral glucose tolerance test shows gestational diabetes. Commenced on dietary management with home glucose monitoring. Referral to diabetes educator completed.",
             diagnoses: [
-                { id: 1, name: "Gestational diabetes mellitus", status: "new", icd10: "O24.4" },
-                { id: 2, name: "Pregnancy - 28 weeks", status: "changed", icd10: "Z34.0" }
+                { id: 1, name: "Gestational diabetes mellitus", status: "new", icd10: "O24.4", currentRecord: null },
+                { id: 2, name: "Pregnancy - 28 weeks", status: "changed", icd10: "Z34.0", currentRecord: "Pregnancy - 20 weeks (confirmed 11/11/2025)" }
             ],
             medications: [],
             measurements: [
-                { id: 1, name: "Fasting glucose (OGTT)", value: "5.8", unit: "mmol/L", date: "05/01/2026" },
-                { id: 2, name: "2hr glucose (OGTT)", value: "9.2", unit: "mmol/L", date: "05/01/2026" },
-                { id: 3, name: "Blood Pressure", value: "118/72", unit: "mmHg", date: "06/01/2026" },
-                { id: 4, name: "Weight", value: "68.5", unit: "kg", date: "06/01/2026" },
-                { id: 5, name: "Fundal height", value: "28", unit: "cm", date: "06/01/2026" }
+                { id: 1, name: "Fasting glucose (OGTT)", value: "5.8", unit: "mmol/L", date: "05/01/2026", currentRecord: "4.6 mmol/L (11/11/2025)" },
+                { id: 2, name: "2hr glucose (OGTT)", value: "9.2", unit: "mmol/L", date: "05/01/2026", currentRecord: "Not previously recorded" },
+                { id: 3, name: "Blood Pressure", value: "118/72", unit: "mmHg", date: "06/01/2026", currentRecord: "115/70 mmHg (11/11/2025)" },
+                { id: 4, name: "Weight", value: "68.5", unit: "kg", date: "06/01/2026", currentRecord: "64.2 kg (11/11/2025)" },
+                { id: 5, name: "Fundal height", value: "28", unit: "cm", date: "06/01/2026", currentRecord: "20 cm (11/11/2025)" }
             ],
             allergies: [],
             reminders: [

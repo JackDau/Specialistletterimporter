@@ -727,6 +727,52 @@ body {
     opacity: 0.5;
 }
 
+/* Current Record vs Proposed Change */
+.current-record {
+    background: var(--neutral-100);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 6px;
+    font-size: 13px;
+    border-left: 3px solid var(--neutral-400);
+}
+
+.current-record .record-label {
+    font-weight: 600;
+    color: var(--neutral-500);
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-right: 6px;
+}
+
+.proposed-change {
+    margin-bottom: 4px;
+}
+
+.proposed-change .record-label {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-right: 6px;
+}
+
+.proposed-value {
+    font-weight: 600;
+    color: var(--neutral-800);
+}
+
+.measurement-date {
+    color: var(--neutral-500);
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+.item-tag.unchanged {
+    background: var(--neutral-100);
+    color: var(--neutral-600);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .review-container {

@@ -25,6 +25,10 @@ const mockLetters = [
             ],
             allergies: [
                 { id: 101, name: "Penicillin", reaction: "Rash", dateRecorded: "01/01/2010" }
+            ],
+            reminders: [
+                { id: 101, description: "Annual diabetes review", dueDate: "March 2026", type: "appointment", dateCreated: "22/07/2025" },
+                { id: 102, description: "Lipid profile check", dueDate: "June 2026", type: "investigation", dateCreated: "15/09/2025" }
             ]
         },
         extractedData: {
@@ -78,7 +82,10 @@ const mockLetters = [
             medications: [
                 { id: 101, name: "Esomeprazole", dose: "40mg", frequency: "daily", dateStarted: "10/06/2021" }
             ],
-            allergies: []
+            allergies: [],
+            reminders: [
+                { id: 101, description: "Barrett's surveillance gastroscopy", dueDate: "June 2026", type: "investigation", dateCreated: "10/06/2023" }
+            ]
         },
         extractedData: {
             summary: "Mr. Brown underwent surveillance colonoscopy which revealed two tubular adenomas in the sigmoid colon, both successfully removed. No evidence of malignancy on histopathology. Continue current PPI therapy for Barrett's oesophagus. Recommend repeat colonoscopy in 3 years.",
@@ -118,7 +125,10 @@ const mockLetters = [
             medications: [
                 { id: 101, name: "Escitalopram", dose: "10mg", frequency: "daily", dateStarted: "05/02/2022" }
             ],
-            allergies: []
+            allergies: [],
+            reminders: [
+                { id: 101, description: "Mental health review", dueDate: "February 2026", type: "appointment", dateCreated: "05/02/2025" }
+            ]
         },
         extractedData: {
             summary: "Ms. Chen presents with newly diagnosed Type 2 Diabetes Mellitus with HbA1c of 9.2%. She also has concurrent hyperthyroidism secondary to Graves' disease. Started on Metformin and Carbimazole. Requires close monitoring of thyroid function and glycaemic control. Diabetes education arranged.",
@@ -170,7 +180,12 @@ const mockLetters = [
                 { id: 104, name: "Alendronate", dose: "70mg", frequency: "weekly", dateStarted: "15/09/2021" },
                 { id: 105, name: "Calcium/Vitamin D", dose: "1 tablet", frequency: "daily", dateStarted: "15/09/2021" }
             ],
-            allergies: []
+            allergies: [],
+            reminders: [
+                { id: 101, description: "Rheumatology review", dueDate: "July 2026", type: "appointment", dateCreated: "15/07/2025" },
+                { id: 102, description: "DEXA scan", dueDate: "September 2026", type: "investigation", dateCreated: "15/09/2024" },
+                { id: 103, description: "FBC/LFT/U&E monitoring", dueDate: "April 2026", type: "investigation", dateCreated: "15/01/2026" }
+            ]
         },
         extractedData: {
             summary: "Mr. Martinez reviewed for management of rheumatoid arthritis. Disease activity remains well controlled on current DMARD therapy. DAS28 score 2.4 indicating remission. Continue current medications. Annual monitoring bloods satisfactory.",
@@ -214,7 +229,11 @@ const mockLetters = [
                 { id: 101, name: "Amlodipine", dose: "5mg", frequency: "daily", dateStarted: "20/05/2010" },
                 { id: 102, name: "Paracetamol", dose: "1g", frequency: "PRN", dateStarted: "15/08/2015" }
             ],
-            allergies: []
+            allergies: [],
+            reminders: [
+                { id: 101, description: "75+ Health Assessment", dueDate: "September 2026", type: "appointment", dateCreated: "14/09/2025" },
+                { id: 102, description: "Influenza vaccination", dueDate: "April 2026", type: "investigation", dateCreated: "01/04/2025" }
+            ]
         },
         extractedData: {
             summary: "Mrs. Nguyen reviewed in Memory Clinic. Cognitive testing reveals mild cognitive impairment, likely early Alzheimer's disease. MRI shows mild hippocampal atrophy. Commenced on cholinesterase inhibitor therapy. Family meeting held to discuss diagnosis and advance care planning.",
@@ -258,7 +277,11 @@ const mockLetters = [
                 { id: 101, name: "Pregnancy multivitamin", dose: "1 tablet", frequency: "daily", dateStarted: "01/08/2025" },
                 { id: 102, name: "Ferrous fumarate", dose: "210mg", frequency: "daily", dateStarted: "11/11/2025" }
             ],
-            allergies: []
+            allergies: [],
+            reminders: [
+                { id: 101, description: "Antenatal visit", dueDate: "22/01/2026", type: "appointment", dateCreated: "11/11/2025" },
+                { id: 102, description: "Morphology ultrasound review", dueDate: "Completed", type: "investigation", dateCreated: "01/08/2025" }
+            ]
         },
         extractedData: {
             summary: "Ms. Patel attended for routine antenatal care at 28 weeks gestation. Pregnancy progressing normally. Oral glucose tolerance test shows gestational diabetes. Commenced on dietary management with home glucose monitoring. Referral to diabetes educator completed.",
@@ -305,7 +328,11 @@ const mockLetters = [
                 { id: 102, name: "Rosuvastatin", dose: "10mg", frequency: "nocte", dateStarted: "10/06/2015" },
                 { id: 103, name: "Paracetamol", dose: "1g", frequency: "PRN", dateStarted: "15/03/2022" }
             ],
-            allergies: []
+            allergies: [],
+            reminders: [
+                { id: 101, description: "Cardiovascular risk review", dueDate: "June 2026", type: "appointment", dateCreated: "10/06/2025" },
+                { id: 102, description: "Fasting lipids", dueDate: "June 2026", type: "investigation", dateCreated: "10/06/2025" }
+            ]
         },
         extractedData: {
             summary: "Mr. Thompson underwent elective right total hip replacement on 6 January 2026 for severe osteoarthritis. Surgery was uncomplicated with Stryker implants. Mobilising well with frame, discharged day 3. Requires VTE prophylaxis for 35 days and posterior hip precautions for 6 weeks.",
@@ -355,7 +382,12 @@ const mockLetters = [
                 { id: 103, name: "Metformin", dose: "1000mg", frequency: "twice daily", dateStarted: "10/03/2015" },
                 { id: 104, name: "Ramipril", dose: "5mg", frequency: "daily", dateStarted: "10/03/2015" }
             ],
-            allergies: []
+            allergies: [],
+            reminders: [
+                { id: 101, description: "HbA1c check", dueDate: "March 2026", type: "investigation", dateCreated: "10/09/2025" },
+                { id: 102, description: "Annual diabetes review", dueDate: "March 2026", type: "appointment", dateCreated: "10/03/2025" },
+                { id: 103, description: "PSA monitoring", dueDate: "May 2026", type: "investigation", dateCreated: "10/11/2025" }
+            ]
         },
         extractedData: {
             summary: "Mr. Papadopoulos underwent TURP on 5 January for BPH with severe LUTS (IPSS 24). 45g tissue resected, histopathology confirmed BPH with no malignancy. Successful trial of void on day 2. Alpha-blocker and 5-ARI therapy ceased as no longer required post-TURP.",
@@ -406,6 +438,10 @@ const mockLetters = [
             ],
             allergies: [
                 { id: 101, name: "Codeine", reaction: "Nausea and vomiting", dateRecorded: "01/01/2005" }
+            ],
+            reminders: [
+                { id: 101, description: "Glaucoma review with visual fields", dueDate: "March 2026", type: "appointment", dateCreated: "10/03/2025" },
+                { id: 102, description: "IOP check", dueDate: "March 2026", type: "investigation", dateCreated: "10/09/2025" }
             ]
         },
         extractedData: {

@@ -58,12 +58,13 @@ function initializeItemStates() {
     deleteStates = {
         pastHistory: {},
         medications: {},
-        allergies: {}
+        allergies: {},
+        reminders: {}
     };
 
     // Initialize each item
     const data = currentLetter.extractedData;
-    const current = currentLetter.currentRecord || { pastHistory: [], medications: [], allergies: [] };
+    const current = currentLetter.currentRecord || { pastHistory: [], medications: [], allergies: [], reminders: [] };
 
     // For diagnoses: procedures are pre-accepted and default to inactive
     // Other diagnoses start pending and default to active when accepted
@@ -77,6 +78,7 @@ function initializeItemStates() {
     current.pastHistory.forEach(item => deleteStates.pastHistory[item.id] = false);
     current.medications.forEach(item => deleteStates.medications[item.id] = false);
     current.allergies.forEach(item => deleteStates.allergies[item.id] = false);
+    (current.reminders || []).forEach(item => deleteStates.reminders[item.id] = false);
 
     data.medications.forEach(m => itemStates.medications[m.id] = 'pending');
     // Measurements default to accepted
@@ -443,31 +445,69 @@ function renderAllergies(allergies) {
 
 function renderReminders(reminders) {
     const container = document.getElementById('reminders-list');
+    const current = currentLetter.currentRecord || { reminders: [] };
+    const currentItems = current.reminders || [];
 
-    if (reminders.length === 0) {
-        container.innerHTML = '<p class="empty-message">No reminders extracted</p>';
+    // Build merged list HTML
+    let html = '';
+
+    // First, render current record items (with delete option)
+    currentItems.forEach(item => {
+        const isDeleted = deleteStates.reminders[item.id];
+        html += `
+        <div class="data-item current-item ${isDeleted ? 'marked-for-delete' : ''}" data-type="current-reminders" data-id="${item.id}">
+            <div class="item-status">
+                <button class="action-btn delete ${isDeleted ? 'active' : ''}" onclick="toggleDeleteCurrentItem('reminders', ${item.id})" title="${isDeleted ? 'Undo Delete' : 'Delete'}">
+                    <span class="icon">${isDeleted ? '↩' : '🗑'}</span>
+                </button>
+            </div>
+            <div class="item-content">
+                <div class="item-label">
+                    ${item.description}
+                    <span class="item-tag current">current</span>
+                </div>
+                <div class="item-value">Due: ${item.dueDate} • ${item.type} • Created: ${item.dateCreated}</div>
+            </div>
+        </div>
+        `;
+    });
+
+    // Then, render proposed items from specialist letter
+    if (reminders.length === 0 && currentItems.length === 0) {
+        container.innerHTML = '<p class="empty-message">No reminders in current record or extracted</p>';
         return;
     }
 
-    container.innerHTML = reminders.map(r => `
-        <div class="data-item" data-type="reminders" data-id="${r.id}">
+    reminders.forEach(r => {
+        const state = itemStates.reminders[r.id];
+        const isAccepted = state === 'accepted';
+        const isRejected = state === 'rejected';
+
+        html += `
+        <div class="data-item proposed-item ${isAccepted ? 'accepted' : ''} ${isRejected ? 'rejected' : ''}" data-type="reminders" data-id="${r.id}">
             <div class="item-status">
-                <button class="action-btn accept" onclick="toggleItemState('reminders', ${r.id}, 'accepted')" title="Accept">
+                <button class="action-btn accept ${isAccepted ? 'active' : ''}" onclick="toggleItemState('reminders', ${r.id}, 'accepted')" title="Accept">
                     <span class="icon">✓</span>
                 </button>
-                <button class="action-btn reject" onclick="toggleItemState('reminders', ${r.id}, 'rejected')" title="Reject">
+                <button class="action-btn reject ${isRejected ? 'active' : ''}" onclick="toggleItemState('reminders', ${r.id}, 'rejected')" title="Reject">
                     <span class="icon">✕</span>
                 </button>
             </div>
             <div class="item-content">
-                <div class="item-label">${r.description}</div>
+                <div class="item-label">
+                    ${r.description}
+                    <span class="item-tag new">new</span>
+                </div>
                 <div class="item-value">Due: ${r.dueDate} • ${r.type}</div>
                 <div class="item-edit">
                     <input type="text" value="${r.dueDate}" placeholder="Edit due date">
                 </div>
             </div>
         </div>
-    `).join('');
+        `;
+    });
+
+    container.innerHTML = html;
 }
 
 function toggleItemState(type, id, newState) {

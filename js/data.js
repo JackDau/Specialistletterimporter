@@ -11,6 +11,22 @@ const mockLetters = [
         dateReceived: "2026-01-09",
         urgency: "urgent",
         pdfFile: "assets/sample-letter-1.html",
+        currentRecord: {
+            pastHistory: [
+                { id: 101, name: "Hypertension", type: "condition", status: "active", icd10: "I10", dateRecorded: "15/03/2018" },
+                { id: 102, name: "Type 2 Diabetes Mellitus", type: "condition", status: "active", icd10: "E11.9", dateRecorded: "22/07/2020" },
+                { id: 103, name: "Hyperlipidaemia", type: "condition", status: "active", icd10: "E78.5", dateRecorded: "15/03/2018" },
+                { id: 104, name: "Appendicectomy", type: "procedure", status: "inactive", icd10: "Z87.09", dateRecorded: "10/05/1985" }
+            ],
+            medications: [
+                { id: 101, name: "Atorvastatin", dose: "40mg", frequency: "nocte", dateStarted: "20/03/2018" },
+                { id: 102, name: "Perindopril", dose: "5mg", frequency: "daily", dateStarted: "15/03/2018" },
+                { id: 103, name: "Metformin", dose: "1000mg", frequency: "twice daily", dateStarted: "22/07/2020" }
+            ],
+            allergies: [
+                { id: 101, name: "Penicillin", reaction: "Rash", dateRecorded: "01/01/2010" }
+            ]
+        },
         extractedData: {
             summary: "Mrs. Anderson was reviewed following her recent admission for acute coronary syndrome. Coronary angiography revealed significant three-vessel disease. She has been commenced on dual antiplatelet therapy and referred for cardiac surgery consultation. Blood pressure remains suboptimally controlled despite current medications.",
             diagnoses: [
@@ -52,6 +68,18 @@ const mockLetters = [
         dateReceived: "2026-01-09",
         urgency: "routine",
         pdfFile: "assets/sample-letter-2.html",
+        currentRecord: {
+            pastHistory: [
+                { id: 101, name: "Barrett's oesophagus", type: "condition", status: "active", icd10: "K22.7", dateRecorded: "10/06/2021" },
+                { id: 102, name: "GORD", type: "condition", status: "active", icd10: "K21.0", dateRecorded: "15/03/2019" },
+                { id: 103, name: "Obesity", type: "condition", status: "active", icd10: "E66.9", dateRecorded: "20/01/2018" },
+                { id: 104, name: "Gastroscopy", type: "procedure", status: "inactive", icd10: "Z12.10", dateRecorded: "10/06/2021" }
+            ],
+            medications: [
+                { id: 101, name: "Esomeprazole", dose: "40mg", frequency: "daily", dateStarted: "10/06/2021" }
+            ],
+            allergies: []
+        },
         extractedData: {
             summary: "Mr. Brown underwent surveillance colonoscopy which revealed two tubular adenomas in the sigmoid colon, both successfully removed. No evidence of malignancy on histopathology. Continue current PPI therapy for Barrett's oesophagus. Recommend repeat colonoscopy in 3 years.",
             diagnoses: [
@@ -82,6 +110,16 @@ const mockLetters = [
         dateReceived: "2026-01-08",
         urgency: "urgent",
         pdfFile: "assets/sample-letter-3.html",
+        currentRecord: {
+            pastHistory: [
+                { id: 101, name: "Anxiety disorder", type: "condition", status: "active", icd10: "F41.9", dateRecorded: "05/02/2022" },
+                { id: 102, name: "Migraine", type: "condition", status: "active", icd10: "G43.9", dateRecorded: "10/08/2019" }
+            ],
+            medications: [
+                { id: 101, name: "Escitalopram", dose: "10mg", frequency: "daily", dateStarted: "05/02/2022" }
+            ],
+            allergies: []
+        },
         extractedData: {
             summary: "Ms. Chen presents with newly diagnosed Type 2 Diabetes Mellitus with HbA1c of 9.2%. She also has concurrent hyperthyroidism secondary to Graves' disease. Started on Metformin and Carbimazole. Requires close monitoring of thyroid function and glycaemic control. Diabetes education arranged.",
             diagnoses: [
@@ -120,6 +158,20 @@ const mockLetters = [
         dateReceived: "2026-01-08",
         urgency: "routine",
         pdfFile: "assets/sample-letter-4.html",
+        currentRecord: {
+            pastHistory: [
+                { id: 101, name: "Rheumatoid arthritis", type: "condition", status: "active", icd10: "M06.9", dateRecorded: "12/04/2019" },
+                { id: 102, name: "Osteoporosis", type: "condition", status: "active", icd10: "M81.0", dateRecorded: "15/09/2021" }
+            ],
+            medications: [
+                { id: 101, name: "Methotrexate", dose: "20mg", frequency: "weekly", dateStarted: "12/04/2019" },
+                { id: 102, name: "Folic acid", dose: "5mg", frequency: "weekly", dateStarted: "12/04/2019" },
+                { id: 103, name: "Hydroxychloroquine", dose: "200mg", frequency: "daily", dateStarted: "12/04/2019" },
+                { id: 104, name: "Alendronate", dose: "70mg", frequency: "weekly", dateStarted: "15/09/2021" },
+                { id: 105, name: "Calcium/Vitamin D", dose: "1 tablet", frequency: "daily", dateStarted: "15/09/2021" }
+            ],
+            allergies: []
+        },
         extractedData: {
             summary: "Mr. Martinez reviewed for management of rheumatoid arthritis. Disease activity remains well controlled on current DMARD therapy. DAS28 score 2.4 indicating remission. Continue current medications. Annual monitoring bloods satisfactory.",
             diagnoses: [
@@ -152,6 +204,18 @@ const mockLetters = [
         dateReceived: "2026-01-07",
         urgency: "routine",
         pdfFile: "assets/sample-letter-5.html",
+        currentRecord: {
+            pastHistory: [
+                { id: 101, name: "Hypertension", type: "condition", status: "active", icd10: "I10", dateRecorded: "20/05/2010" },
+                { id: 102, name: "Osteoarthritis - bilateral knees", type: "condition", status: "active", icd10: "M17.0", dateRecorded: "15/08/2015" },
+                { id: 103, name: "Cholecystectomy", type: "procedure", status: "inactive", icd10: "Z87.09", dateRecorded: "10/03/1998" }
+            ],
+            medications: [
+                { id: 101, name: "Amlodipine", dose: "5mg", frequency: "daily", dateStarted: "20/05/2010" },
+                { id: 102, name: "Paracetamol", dose: "1g", frequency: "PRN", dateStarted: "15/08/2015" }
+            ],
+            allergies: []
+        },
         extractedData: {
             summary: "Mrs. Nguyen reviewed in Memory Clinic. Cognitive testing reveals mild cognitive impairment, likely early Alzheimer's disease. MRI shows mild hippocampal atrophy. Commenced on cholinesterase inhibitor therapy. Family meeting held to discuss diagnosis and advance care planning.",
             diagnoses: [
@@ -185,6 +249,17 @@ const mockLetters = [
         dateReceived: "2026-01-07",
         urgency: "routine",
         pdfFile: "assets/sample-letter-6.html",
+        currentRecord: {
+            pastHistory: [
+                { id: 101, name: "Pregnancy - 20 weeks", type: "condition", status: "active", icd10: "Z34.0", dateRecorded: "11/11/2025" },
+                { id: 102, name: "Iron deficiency anaemia", type: "condition", status: "active", icd10: "D50.9", dateRecorded: "11/11/2025" }
+            ],
+            medications: [
+                { id: 101, name: "Pregnancy multivitamin", dose: "1 tablet", frequency: "daily", dateStarted: "01/08/2025" },
+                { id: 102, name: "Ferrous fumarate", dose: "210mg", frequency: "daily", dateStarted: "11/11/2025" }
+            ],
+            allergies: []
+        },
         extractedData: {
             summary: "Ms. Patel attended for routine antenatal care at 28 weeks gestation. Pregnancy progressing normally. Oral glucose tolerance test shows gestational diabetes. Commenced on dietary management with home glucose monitoring. Referral to diabetes educator completed.",
             diagnoses: [
@@ -218,6 +293,20 @@ const mockLetters = [
         dateReceived: "2026-01-09",
         urgency: "routine",
         pdfFile: "assets/sample-letter-7.html",
+        currentRecord: {
+            pastHistory: [
+                { id: 101, name: "Right hip osteoarthritis", type: "condition", status: "active", icd10: "M16.11", dateRecorded: "15/03/2022" },
+                { id: 102, name: "Hypertension", type: "condition", status: "active", icd10: "I10", dateRecorded: "10/06/2015" },
+                { id: 103, name: "Hyperlipidaemia", type: "condition", status: "active", icd10: "E78.5", dateRecorded: "10/06/2015" },
+                { id: 104, name: "Left total knee replacement", type: "procedure", status: "inactive", icd10: "Z96.65", dateRecorded: "20/08/2020" }
+            ],
+            medications: [
+                { id: 101, name: "Lisinopril", dose: "10mg", frequency: "daily", dateStarted: "10/06/2015" },
+                { id: 102, name: "Rosuvastatin", dose: "10mg", frequency: "nocte", dateStarted: "10/06/2015" },
+                { id: 103, name: "Paracetamol", dose: "1g", frequency: "PRN", dateStarted: "15/03/2022" }
+            ],
+            allergies: []
+        },
         extractedData: {
             summary: "Mr. Thompson underwent elective right total hip replacement on 6 January 2026 for severe osteoarthritis. Surgery was uncomplicated with Stryker implants. Mobilising well with frame, discharged day 3. Requires VTE prophylaxis for 35 days and posterior hip precautions for 6 weeks.",
             diagnoses: [
@@ -253,6 +342,21 @@ const mockLetters = [
         dateReceived: "2026-01-08",
         urgency: "routine",
         pdfFile: "assets/sample-letter-8.html",
+        currentRecord: {
+            pastHistory: [
+                { id: 101, name: "Benign prostatic hyperplasia", type: "condition", status: "active", icd10: "N40.1", dateRecorded: "15/05/2020" },
+                { id: 102, name: "Type 2 Diabetes Mellitus", type: "condition", status: "active", icd10: "E11.9", dateRecorded: "10/03/2015" },
+                { id: 103, name: "Hypertension", type: "condition", status: "active", icd10: "I10", dateRecorded: "10/03/2015" },
+                { id: 104, name: "Inguinal hernia repair - right", type: "procedure", status: "inactive", icd10: "Z87.09", dateRecorded: "20/06/2008" }
+            ],
+            medications: [
+                { id: 101, name: "Tamsulosin", dose: "400mcg", frequency: "daily", dateStarted: "15/05/2020" },
+                { id: 102, name: "Finasteride", dose: "5mg", frequency: "daily", dateStarted: "15/05/2020" },
+                { id: 103, name: "Metformin", dose: "1000mg", frequency: "twice daily", dateStarted: "10/03/2015" },
+                { id: 104, name: "Ramipril", dose: "5mg", frequency: "daily", dateStarted: "10/03/2015" }
+            ],
+            allergies: []
+        },
         extractedData: {
             summary: "Mr. Papadopoulos underwent TURP on 5 January for BPH with severe LUTS (IPSS 24). 45g tissue resected, histopathology confirmed BPH with no malignancy. Successful trial of void on day 2. Alpha-blocker and 5-ARI therapy ceased as no longer required post-TURP.",
             diagnoses: [
@@ -287,6 +391,23 @@ const mockLetters = [
         dateReceived: "2026-01-10",
         urgency: "routine",
         pdfFile: "assets/sample-letter-9.html",
+        currentRecord: {
+            pastHistory: [
+                { id: 101, name: "Left cataract (nuclear sclerotic)", type: "condition", status: "active", icd10: "H25.9", dateRecorded: "15/12/2025" },
+                { id: 102, name: "Pseudophakia right eye", type: "condition", status: "inactive", icd10: "Z96.1", dateRecorded: "20/06/2024" },
+                { id: 103, name: "Primary open-angle glaucoma", type: "condition", status: "active", icd10: "H40.11", dateRecorded: "10/03/2020" },
+                { id: 104, name: "Hypertension", type: "condition", status: "active", icd10: "I10", dateRecorded: "15/05/2010" },
+                { id: 105, name: "Phacoemulsification right eye", type: "procedure", status: "inactive", icd10: "Z96.1", dateRecorded: "20/06/2024" }
+            ],
+            medications: [
+                { id: 101, name: "Latanoprost eye drops", dose: "1 drop each eye", frequency: "nocte", dateStarted: "10/03/2020" },
+                { id: 102, name: "Amlodipine", dose: "5mg", frequency: "daily", dateStarted: "15/05/2010" },
+                { id: 103, name: "Aspirin", dose: "100mg", frequency: "daily", dateStarted: "15/05/2010" }
+            ],
+            allergies: [
+                { id: 101, name: "Codeine", reaction: "Nausea and vomiting", dateRecorded: "01/01/2005" }
+            ]
+        },
         extractedData: {
             summary: "Mrs. O'Brien underwent uncomplicated left cataract surgery (phacoemulsification + IOL) today. Pre-op vision L 6/36, Alcon SN60WF +21.5D lens inserted targeting plano. Post-operative drop regimen dispensed. Day 1 review tomorrow, driving restriction until reviewed.",
             diagnoses: [

@@ -3,6 +3,7 @@
 let currentLetter = null;
 let itemStates = {}; // Track accepted/rejected state for each item
 let historyStates = {}; // Track active/inactive state for diagnoses (only applies when accepted)
+let deleteStates = {}; // Track items marked for deletion from current record
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeReviewPage();
@@ -53,8 +54,16 @@ function initializeItemStates() {
         diagnoses: {}
     };
 
+    // Initialize delete states for current record items
+    deleteStates = {
+        pastHistory: {},
+        medications: {},
+        allergies: {}
+    };
+
     // Initialize each item
     const data = currentLetter.extractedData;
+    const current = currentLetter.currentRecord || { pastHistory: [], medications: [], allergies: [] };
 
     // For diagnoses: procedures are pre-accepted and default to inactive
     // Other diagnoses start pending and default to active when accepted
@@ -64,8 +73,14 @@ function initializeItemStates() {
         historyStates.diagnoses[d.id] = isProcedure ? 'inactive' : 'active';
     });
 
+    // Initialize current record items as not deleted
+    current.pastHistory.forEach(item => deleteStates.pastHistory[item.id] = false);
+    current.medications.forEach(item => deleteStates.medications[item.id] = false);
+    current.allergies.forEach(item => deleteStates.allergies[item.id] = false);
+
     data.medications.forEach(m => itemStates.medications[m.id] = 'pending');
-    data.measurements.forEach(m => itemStates.measurements[m.id] = 'pending');
+    // Measurements default to accepted
+    data.measurements.forEach(m => itemStates.measurements[m.id] = 'accepted');
     data.allergies.forEach(a => itemStates.allergies[a.id] = 'pending');
     data.reminders.forEach(r => itemStates.reminders[r.id] = 'pending');
 }
@@ -115,21 +130,49 @@ function renderExtractedData() {
 
 function renderDiagnoses(diagnoses) {
     const container = document.getElementById('diagnoses-list');
+    const current = currentLetter.currentRecord || { pastHistory: [] };
+    const currentItems = current.pastHistory || [];
 
-    if (diagnoses.length === 0) {
-        container.innerHTML = '<p class="empty-message">No items extracted</p>';
+    // Build merged list HTML
+    let html = '';
+
+    // First, render current record items (with delete option)
+    currentItems.forEach(item => {
+        const isDeleted = deleteStates.pastHistory[item.id];
+        html += `
+        <div class="data-item current-item ${isDeleted ? 'marked-for-delete' : ''}" data-type="current-pastHistory" data-id="${item.id}">
+            <div class="item-status">
+                <button class="action-btn delete ${isDeleted ? 'active' : ''}" onclick="toggleDeleteCurrentItem('pastHistory', ${item.id})" title="${isDeleted ? 'Undo Delete' : 'Delete'}">
+                    <span class="icon">${isDeleted ? '↩' : '🗑'}</span>
+                </button>
+            </div>
+            <div class="item-content">
+                <div class="item-label">
+                    ${item.name}
+                    <span class="item-tag current">${item.status}</span>
+                    <span class="item-tag ${item.type === 'procedure' ? 'procedure' : 'condition'}">${item.type}</span>
+                </div>
+                <div class="item-value">ICD-10: ${item.icd10} • Recorded: ${item.dateRecorded}</div>
+            </div>
+        </div>
+        `;
+    });
+
+    // Then, render proposed items from specialist letter
+    if (diagnoses.length === 0 && currentItems.length === 0) {
+        container.innerHTML = '<p class="empty-message">No items in current record or extracted</p>';
         return;
     }
 
-    container.innerHTML = diagnoses.map(d => {
+    diagnoses.forEach(d => {
         const isProcedure = d.type === 'procedure';
         const state = itemStates.diagnoses[d.id];
         const historyState = historyStates.diagnoses[d.id];
         const isAccepted = state === 'accepted';
         const isRejected = state === 'rejected';
 
-        return `
-        <div class="data-item ${isAccepted ? 'accepted' : ''} ${isRejected ? 'rejected' : ''}" data-type="diagnoses" data-id="${d.id}">
+        html += `
+        <div class="data-item proposed-item ${isAccepted ? 'accepted' : ''} ${isRejected ? 'rejected' : ''}" data-type="diagnoses" data-id="${d.id}">
             <div class="item-status">
                 <button class="action-btn accept ${isAccepted ? 'active' : ''}" onclick="toggleItemState('diagnoses', ${d.id}, 'accepted')" title="Accept">
                     <span class="icon">✓</span>
@@ -139,13 +182,11 @@ function renderDiagnoses(diagnoses) {
                 </button>
             </div>
             <div class="item-content">
-                ${d.currentRecord ? `
-                    <div class="current-record">
-                        <span class="record-label">Current:</span> ${d.currentRecord}
-                    </div>
-                ` : ''}
+                <div class="current-record">
+                    <span class="record-label">Current:</span> ${d.currentRecord || 'No existing record'}
+                </div>
                 <div class="proposed-change">
-                    <span class="record-label">${d.currentRecord ? 'Proposed:' : ''}</span>
+                    <span class="record-label">Proposed:</span>
                     <span class="item-label">
                         ${d.name}
                         <span class="item-tag ${d.type === 'procedure' ? 'procedure' : d.status}">${d.type === 'procedure' ? 'procedure' : d.status}</span>
@@ -171,7 +212,10 @@ function renderDiagnoses(diagnoses) {
                 </div>
             </div>
         </div>
-    `}).join('');
+        `;
+    });
+
+    container.innerHTML = html;
 }
 
 function setHistoryState(diagnosisId, state) {
@@ -186,32 +230,86 @@ function setHistoryState(diagnosisId, state) {
     }
 }
 
+function toggleDeleteCurrentItem(type, id) {
+    // Toggle delete state
+    deleteStates[type][id] = !deleteStates[type][id];
+
+    // Update UI
+    const dataType = type === 'pastHistory' ? 'current-pastHistory' : `current-${type}`;
+    const item = document.querySelector(`.data-item[data-type="${dataType}"][data-id="${id}"]`);
+    if (item) {
+        if (deleteStates[type][id]) {
+            item.classList.add('marked-for-delete');
+            const btn = item.querySelector('.action-btn.delete');
+            btn.classList.add('active');
+            btn.innerHTML = '<span class="icon">↩</span>';
+            btn.title = 'Undo Delete';
+        } else {
+            item.classList.remove('marked-for-delete');
+            const btn = item.querySelector('.action-btn.delete');
+            btn.classList.remove('active');
+            btn.innerHTML = '<span class="icon">🗑</span>';
+            btn.title = 'Delete';
+        }
+    }
+}
+
 function renderMedications(medications) {
     const container = document.getElementById('medications-list');
+    const current = currentLetter.currentRecord || { medications: [] };
+    const currentItems = current.medications || [];
 
-    if (medications.length === 0) {
-        container.innerHTML = '<p class="empty-message">No medication changes extracted</p>';
+    // Build merged list HTML
+    let html = '';
+
+    // First, render current record items (with delete option)
+    currentItems.forEach(item => {
+        const isDeleted = deleteStates.medications[item.id];
+        html += `
+        <div class="data-item current-item ${isDeleted ? 'marked-for-delete' : ''}" data-type="current-medications" data-id="${item.id}">
+            <div class="item-status">
+                <button class="action-btn delete ${isDeleted ? 'active' : ''}" onclick="toggleDeleteCurrentItem('medications', ${item.id})" title="${isDeleted ? 'Undo Delete' : 'Delete'}">
+                    <span class="icon">${isDeleted ? '↩' : '🗑'}</span>
+                </button>
+            </div>
+            <div class="item-content">
+                <div class="item-label">
+                    ${item.name} ${item.dose} ${item.frequency}
+                    <span class="item-tag current">current</span>
+                </div>
+                <div class="item-value">Started: ${item.dateStarted}</div>
+            </div>
+        </div>
+        `;
+    });
+
+    // Then, render proposed items from specialist letter
+    if (medications.length === 0 && currentItems.length === 0) {
+        container.innerHTML = '<p class="empty-message">No medications in current record or extracted</p>';
         return;
     }
 
-    container.innerHTML = medications.map(m => `
-        <div class="data-item" data-type="medications" data-id="${m.id}">
+    medications.forEach(m => {
+        const state = itemStates.medications[m.id];
+        const isAccepted = state === 'accepted';
+        const isRejected = state === 'rejected';
+
+        html += `
+        <div class="data-item proposed-item ${isAccepted ? 'accepted' : ''} ${isRejected ? 'rejected' : ''}" data-type="medications" data-id="${m.id}">
             <div class="item-status">
-                <button class="action-btn accept" onclick="toggleItemState('medications', ${m.id}, 'accepted')" title="Accept">
+                <button class="action-btn accept ${isAccepted ? 'active' : ''}" onclick="toggleItemState('medications', ${m.id}, 'accepted')" title="Accept">
                     <span class="icon">✓</span>
                 </button>
-                <button class="action-btn reject" onclick="toggleItemState('medications', ${m.id}, 'rejected')" title="Reject">
+                <button class="action-btn reject ${isRejected ? 'active' : ''}" onclick="toggleItemState('medications', ${m.id}, 'rejected')" title="Reject">
                     <span class="icon">✕</span>
                 </button>
             </div>
             <div class="item-content">
-                ${m.currentRecord ? `
-                    <div class="current-record">
-                        <span class="record-label">Current:</span> ${m.currentRecord}
-                    </div>
-                ` : ''}
+                <div class="current-record">
+                    <span class="record-label">Current:</span> ${m.currentRecord || 'No existing record'}
+                </div>
                 <div class="proposed-change">
-                    <span class="record-label">${m.currentRecord ? 'Proposed:' : ''}</span>
+                    <span class="record-label">Proposed:</span>
                     <span class="item-label">
                         ${m.name} ${m.dose} ${m.frequency}
                         <span class="item-tag ${m.status}">${m.status}</span>
@@ -223,7 +321,10 @@ function renderMedications(medications) {
                 </div>
             </div>
         </div>
-    `).join('');
+        `;
+    });
+
+    container.innerHTML = html;
 }
 
 function renderMeasurements(measurements) {
@@ -234,25 +335,28 @@ function renderMeasurements(measurements) {
         return;
     }
 
-    container.innerHTML = measurements.map(m => `
-        <div class="data-item" data-type="measurements" data-id="${m.id}">
+    container.innerHTML = measurements.map(m => {
+        const state = itemStates.measurements[m.id];
+        const isAccepted = state === 'accepted';
+        const isRejected = state === 'rejected';
+
+        return `
+        <div class="data-item ${isAccepted ? 'accepted' : ''} ${isRejected ? 'rejected' : ''}" data-type="measurements" data-id="${m.id}">
             <div class="item-status">
-                <button class="action-btn accept" onclick="toggleItemState('measurements', ${m.id}, 'accepted')" title="Accept">
+                <button class="action-btn accept ${isAccepted ? 'active' : ''}" onclick="toggleItemState('measurements', ${m.id}, 'accepted')" title="Accept">
                     <span class="icon">✓</span>
                 </button>
-                <button class="action-btn reject" onclick="toggleItemState('measurements', ${m.id}, 'rejected')" title="Reject">
+                <button class="action-btn reject ${isRejected ? 'active' : ''}" onclick="toggleItemState('measurements', ${m.id}, 'rejected')" title="Reject">
                     <span class="icon">✕</span>
                 </button>
             </div>
             <div class="item-content">
                 <div class="item-label">${m.name}</div>
-                ${m.currentRecord ? `
-                    <div class="current-record">
-                        <span class="record-label">Current:</span> ${m.currentRecord}
-                    </div>
-                ` : ''}
+                <div class="current-record">
+                    <span class="record-label">Current:</span> ${m.currentRecord || 'No existing record'}
+                </div>
                 <div class="proposed-change">
-                    <span class="record-label">${m.currentRecord ? 'New:' : ''}</span>
+                    <span class="record-label">New:</span>
                     <span class="proposed-value">${m.value} ${m.unit}</span>
                     <span class="measurement-date">(${m.date})</span>
                 </div>
@@ -261,35 +365,65 @@ function renderMeasurements(measurements) {
                 </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 }
 
 function renderAllergies(allergies) {
     const container = document.getElementById('allergies-list');
+    const current = currentLetter.currentRecord || { allergies: [] };
+    const currentItems = current.allergies || [];
 
-    if (allergies.length === 0) {
-        container.innerHTML = '<p class="empty-message">No allergies extracted</p>';
+    // Build merged list HTML
+    let html = '';
+
+    // First, render current record items (with delete option)
+    currentItems.forEach(item => {
+        const isDeleted = deleteStates.allergies[item.id];
+        html += `
+        <div class="data-item current-item ${isDeleted ? 'marked-for-delete' : ''}" data-type="current-allergies" data-id="${item.id}">
+            <div class="item-status">
+                <button class="action-btn delete ${isDeleted ? 'active' : ''}" onclick="toggleDeleteCurrentItem('allergies', ${item.id})" title="${isDeleted ? 'Undo Delete' : 'Delete'}">
+                    <span class="icon">${isDeleted ? '↩' : '🗑'}</span>
+                </button>
+            </div>
+            <div class="item-content">
+                <div class="item-label">
+                    ${item.name}
+                    <span class="item-tag current">current</span>
+                </div>
+                <div class="item-value">Reaction: ${item.reaction} • Recorded: ${item.dateRecorded}</div>
+            </div>
+        </div>
+        `;
+    });
+
+    // Then, render proposed items from specialist letter
+    if (allergies.length === 0 && currentItems.length === 0) {
+        container.innerHTML = '<p class="empty-message">No allergies in current record or extracted</p>';
         return;
     }
 
-    container.innerHTML = allergies.map(a => `
-        <div class="data-item" data-type="allergies" data-id="${a.id}">
+    allergies.forEach(a => {
+        const state = itemStates.allergies[a.id];
+        const isAccepted = state === 'accepted';
+        const isRejected = state === 'rejected';
+
+        html += `
+        <div class="data-item proposed-item ${isAccepted ? 'accepted' : ''} ${isRejected ? 'rejected' : ''}" data-type="allergies" data-id="${a.id}">
             <div class="item-status">
-                <button class="action-btn accept" onclick="toggleItemState('allergies', ${a.id}, 'accepted')" title="Accept">
+                <button class="action-btn accept ${isAccepted ? 'active' : ''}" onclick="toggleItemState('allergies', ${a.id}, 'accepted')" title="Accept">
                     <span class="icon">✓</span>
                 </button>
-                <button class="action-btn reject" onclick="toggleItemState('allergies', ${a.id}, 'rejected')" title="Reject">
+                <button class="action-btn reject ${isRejected ? 'active' : ''}" onclick="toggleItemState('allergies', ${a.id}, 'rejected')" title="Reject">
                     <span class="icon">✕</span>
                 </button>
             </div>
             <div class="item-content">
-                ${a.currentRecord ? `
-                    <div class="current-record">
-                        <span class="record-label">Current:</span> ${a.currentRecord}
-                    </div>
-                ` : ''}
+                <div class="current-record">
+                    <span class="record-label">Current:</span> ${a.currentRecord || 'No existing record'}
+                </div>
                 <div class="proposed-change">
-                    <span class="record-label">${a.currentRecord ? 'Proposed:' : ''}</span>
+                    <span class="record-label">Proposed:</span>
                     <span class="item-label">
                         ${a.name}
                         <span class="item-tag ${a.status}">${a.status}</span>
@@ -301,7 +435,10 @@ function renderAllergies(allergies) {
                 </div>
             </div>
         </div>
-    `).join('');
+        `;
+    });
+
+    container.innerHTML = html;
 }
 
 function renderReminders(reminders) {

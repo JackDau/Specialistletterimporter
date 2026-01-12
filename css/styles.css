@@ -829,6 +829,78 @@ body {
     color: var(--white);
 }
 
+/* Current Record Items */
+.data-item.current-item {
+    background: var(--neutral-50);
+    border-left: 3px solid var(--neutral-400);
+}
+
+.data-item.current-item .item-content {
+    opacity: 0.9;
+}
+
+/* Proposed Items (from specialist letter) */
+.data-item.proposed-item {
+    border-left: 3px solid var(--primary-color);
+}
+
+/* Items Marked for Deletion */
+.data-item.marked-for-delete {
+    background: #fef2f2;
+    border-left-color: var(--danger-color);
+    opacity: 0.7;
+}
+
+.data-item.marked-for-delete .item-content {
+    text-decoration: line-through;
+    color: var(--neutral-500);
+}
+
+.data-item.marked-for-delete .item-tag {
+    text-decoration: none;
+}
+
+/* Delete Button */
+.action-btn.delete {
+    color: var(--neutral-500);
+    background: var(--white);
+}
+
+.action-btn.delete:hover {
+    background: #fef2f2;
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.action-btn.delete.active {
+    background: var(--danger-color);
+    color: var(--white);
+    border-color: var(--danger-color);
+}
+
+/* Current Tag */
+.item-tag.current {
+    background: var(--neutral-200);
+    color: var(--neutral-700);
+}
+
+/* Condition Tag */
+.item-tag.condition {
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+
+/* Active/Inactive Status Tags */
+.item-tag.active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.item-tag.inactive {
+    background: var(--neutral-100);
+    color: var(--neutral-600);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .review-container {

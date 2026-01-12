@@ -205,6 +205,109 @@ const mockLetters = [
                 { id: 4, description: "Postnatal OGTT", dueDate: "6-12 weeks postpartum", type: "investigation" }
             ]
         }
+    },
+    {
+        id: 7,
+        patientName: "Thompson, William",
+        patientDOB: "18/06/1952",
+        patientUR: "MRN-5738291",
+        specialist: "Mr. Andrew Richardson",
+        speciality: "Orthopaedic Surgery",
+        dateReceived: "2026-01-09",
+        urgency: "routine",
+        pdfFile: "assets/sample-letter-7.html",
+        extractedData: {
+            summary: "Mr. Thompson underwent elective right total hip replacement on 6 January 2026 for severe osteoarthritis. Surgery was uncomplicated with Stryker implants. Mobilising well with frame, discharged day 3. Requires VTE prophylaxis for 35 days and posterior hip precautions for 6 weeks.",
+            diagnoses: [
+                { id: 1, name: "Right total hip replacement - post-operative", status: "new", icd10: "Z96.64", currentRecord: null },
+                { id: 2, name: "Right hip osteoarthritis - severe", status: "changed", icd10: "M16.11", currentRecord: "Right hip osteoarthritis" }
+            ],
+            medications: [
+                { id: 1, name: "Aspirin", dose: "150mg", frequency: "daily", status: "new", note: "VTE prophylaxis - 35 days total", currentRecord: null },
+                { id: 2, name: "Paracetamol", dose: "1g", frequency: "QID", status: "new", note: "Regular for 2 weeks then PRN", currentRecord: null },
+                { id: 3, name: "Oxycodone", dose: "5-10mg", frequency: "PRN", status: "new", note: "Breakthrough pain - 20 tablets supplied", currentRecord: null },
+                { id: 4, name: "Pantoprazole", dose: "40mg", frequency: "daily", status: "new", note: "Gastric protection while on aspirin", currentRecord: null },
+                { id: 5, name: "Docusate/Senna", dose: "1-2 tablets", frequency: "nocte", status: "new", note: "While on opioids", currentRecord: null }
+            ],
+            measurements: [
+                { id: 1, name: "Haemoglobin", value: "98", unit: "g/L", date: "08/01/2026", currentRecord: "142 g/L (02/01/2026 pre-op)" },
+                { id: 2, name: "Blood Loss (intra-op)", value: "350", unit: "mL", date: "06/01/2026", currentRecord: null }
+            ],
+            allergies: [],
+            reminders: [
+                { id: 1, description: "Wound review with practice nurse", dueDate: "10-14 days post-op", type: "appointment" },
+                { id: 2, description: "Orthopaedic review with X-ray", dueDate: "6 weeks", type: "appointment" },
+                { id: 3, description: "Cease aspirin (VTE prophylaxis)", dueDate: "35 days post-op (10 Feb)", type: "investigation" }
+            ]
+        }
+    },
+    {
+        id: 8,
+        patientName: "Papadopoulos, George",
+        patientDOB: "25/02/1948",
+        patientUR: "MRN-6284917",
+        specialist: "Mr. David Keogh",
+        speciality: "Urology",
+        dateReceived: "2026-01-08",
+        urgency: "routine",
+        pdfFile: "assets/sample-letter-8.html",
+        extractedData: {
+            summary: "Mr. Papadopoulos underwent TURP on 5 January for BPH with severe LUTS (IPSS 24). 45g tissue resected, histopathology confirmed BPH with no malignancy. Successful trial of void on day 2. Alpha-blocker and 5-ARI therapy ceased as no longer required post-TURP.",
+            diagnoses: [
+                { id: 1, name: "Benign prostatic hyperplasia - post TURP", status: "changed", icd10: "N40.1", currentRecord: "Benign prostatic hyperplasia" },
+                { id: 2, name: "TURP - transurethral resection of prostate", status: "new", icd10: "Z87.438", currentRecord: null }
+            ],
+            medications: [
+                { id: 1, name: "Trimethoprim", dose: "300mg", frequency: "nocte", status: "new", note: "Prophylactic - 7 days only", currentRecord: null },
+                { id: 2, name: "Tamsulosin", dose: "400mcg", frequency: "daily", status: "ceased", note: "No longer required post-TURP", currentRecord: "Tamsulosin 400mcg daily (ACTIVE)" },
+                { id: 3, name: "Finasteride", dose: "5mg", frequency: "daily", status: "ceased", note: "No longer required post-TURP", currentRecord: "Finasteride 5mg daily (ACTIVE)" }
+            ],
+            measurements: [
+                { id: 1, name: "PSA", value: "4.8", unit: "ng/mL", date: "15/11/2025", currentRecord: "5.2 ng/mL (10/05/2025)" },
+                { id: 2, name: "Prostate Volume", value: "85", unit: "mL", date: "15/11/2025", currentRecord: null },
+                { id: 3, name: "Post-void Residual", value: "45", unit: "mL", date: "07/01/2026", currentRecord: "180 mL (15/11/2025)" },
+                { id: 4, name: "IPSS Score", value: "Pending", unit: "", date: "07/01/2026", currentRecord: "24 (severe) (15/11/2025)" }
+            ],
+            allergies: [],
+            reminders: [
+                { id: 1, description: "Urology review with flow study", dueDate: "6 weeks", type: "appointment" },
+                { id: 2, description: "Repeat PSA", dueDate: "3 months", type: "investigation" }
+            ]
+        }
+    },
+    {
+        id: 9,
+        patientName: "O'Brien, Patricia",
+        patientDOB: "07/04/1940",
+        patientUR: "MRN-7391825",
+        specialist: "Dr. Helen Nguyen",
+        speciality: "Ophthalmology",
+        dateReceived: "2026-01-10",
+        urgency: "routine",
+        pdfFile: "assets/sample-letter-9.html",
+        extractedData: {
+            summary: "Mrs. O'Brien underwent uncomplicated left cataract surgery (phacoemulsification + IOL) today. Pre-op vision L 6/36, Alcon SN60WF +21.5D lens inserted targeting plano. Post-operative drop regimen dispensed. Day 1 review tomorrow, driving restriction until reviewed.",
+            diagnoses: [
+                { id: 1, name: "Left cataract - post phacoemulsification", status: "changed", icd10: "H25.9", currentRecord: "Left cataract (nuclear sclerotic)" },
+                { id: 2, name: "Pseudophakia left eye", status: "new", icd10: "Z96.1", currentRecord: null }
+            ],
+            medications: [
+                { id: 1, name: "Chloramphenicol 0.5% eye drops", dose: "1 drop LEFT eye", frequency: "QID", status: "new", note: "For 2 weeks", currentRecord: null },
+                { id: 2, name: "Prednisolone acetate 1% eye drops", dose: "1 drop LEFT eye", frequency: "QID week 1, BD week 2, daily week 3", status: "new", note: "Tapering course - 3 weeks total", currentRecord: null },
+                { id: 3, name: "Nepafenac 0.1% eye drops", dose: "1 drop LEFT eye", frequency: "daily", status: "new", note: "For 4 weeks", currentRecord: null }
+            ],
+            measurements: [
+                { id: 1, name: "Visual Acuity (Left)", value: "6/36", unit: "", date: "10/01/2026", currentRecord: "6/36 (15/12/2025)" },
+                { id: 2, name: "Visual Acuity (Right)", value: "6/9", unit: "", date: "10/01/2026", currentRecord: "6/9 - previous cataract surgery 2024" },
+                { id: 3, name: "Intraocular Pressure (Left)", value: "16", unit: "mmHg", date: "10/01/2026", currentRecord: "16 mmHg (15/12/2025)" }
+            ],
+            allergies: [],
+            reminders: [
+                { id: 1, description: "Day 1 post-op review", dueDate: "Tomorrow (11 Jan)", type: "appointment" },
+                { id: 2, description: "2 week post-op review with refraction", dueDate: "24 January 2026", type: "appointment" },
+                { id: 3, description: "New glasses prescription", dueDate: "4 weeks post-op", type: "investigation" }
+            ]
+        }
     }
 ];
 

@@ -14,9 +14,10 @@ const mockLetters = [
         extractedData: {
             summary: "Mrs. Anderson was reviewed following her recent admission for acute coronary syndrome. Coronary angiography revealed significant three-vessel disease. She has been commenced on dual antiplatelet therapy and referred for cardiac surgery consultation. Blood pressure remains suboptimally controlled despite current medications.",
             diagnoses: [
-                { id: 1, name: "Three-vessel coronary artery disease", status: "new", icd10: "I25.10", currentRecord: null },
-                { id: 2, name: "Acute coronary syndrome", status: "new", icd10: "I24.9", currentRecord: null },
-                { id: 3, name: "Hypertension - poorly controlled", status: "changed", icd10: "I10", currentRecord: "Hypertension" }
+                { id: 1, name: "Three-vessel coronary artery disease", type: "condition", status: "new", icd10: "I25.10", currentRecord: null },
+                { id: 2, name: "Acute coronary syndrome", type: "condition", status: "new", icd10: "I24.9", currentRecord: null },
+                { id: 3, name: "Hypertension - poorly controlled", type: "condition", status: "changed", icd10: "I10", currentRecord: "Hypertension" },
+                { id: 4, name: "Coronary angiography", type: "procedure", status: "new", icd10: "Z95.5", currentRecord: null }
             ],
             medications: [
                 { id: 1, name: "Aspirin", dose: "100mg", frequency: "daily", status: "new", currentRecord: null },
@@ -54,8 +55,9 @@ const mockLetters = [
         extractedData: {
             summary: "Mr. Brown underwent surveillance colonoscopy which revealed two tubular adenomas in the sigmoid colon, both successfully removed. No evidence of malignancy on histopathology. Continue current PPI therapy for Barrett's oesophagus. Recommend repeat colonoscopy in 3 years.",
             diagnoses: [
-                { id: 1, name: "Colonic tubular adenomas - removed", status: "new", icd10: "D12.5", currentRecord: null },
-                { id: 2, name: "Barrett's oesophagus - stable", status: "changed", icd10: "K22.7", currentRecord: "Barrett's oesophagus" }
+                { id: 1, name: "Colonic tubular adenomas - removed", type: "condition", status: "new", icd10: "D12.5", currentRecord: null },
+                { id: 2, name: "Barrett's oesophagus - stable", type: "condition", status: "changed", icd10: "K22.7", currentRecord: "Barrett's oesophagus" },
+                { id: 3, name: "Colonoscopy with polypectomy", type: "procedure", status: "new", icd10: "Z12.11", currentRecord: null }
             ],
             medications: [
                 { id: 1, name: "Esomeprazole", dose: "40mg", frequency: "daily", status: "unchanged", note: "Continue current therapy", currentRecord: "Esomeprazole 40mg daily" }
@@ -83,8 +85,8 @@ const mockLetters = [
         extractedData: {
             summary: "Ms. Chen presents with newly diagnosed Type 2 Diabetes Mellitus with HbA1c of 9.2%. She also has concurrent hyperthyroidism secondary to Graves' disease. Started on Metformin and Carbimazole. Requires close monitoring of thyroid function and glycaemic control. Diabetes education arranged.",
             diagnoses: [
-                { id: 1, name: "Type 2 Diabetes Mellitus", status: "new", icd10: "E11.9", currentRecord: null },
-                { id: 2, name: "Graves' disease with hyperthyroidism", status: "new", icd10: "E05.0", currentRecord: null }
+                { id: 1, name: "Type 2 Diabetes Mellitus", type: "condition", status: "new", icd10: "E11.9", currentRecord: null },
+                { id: 2, name: "Graves' disease with hyperthyroidism", type: "condition", status: "new", icd10: "E05.0", currentRecord: null }
             ],
             medications: [
                 { id: 1, name: "Metformin", dose: "500mg", frequency: "twice daily", status: "new", note: "Titrate to 1000mg BD over 4 weeks", currentRecord: null },
@@ -121,7 +123,7 @@ const mockLetters = [
         extractedData: {
             summary: "Mr. Martinez reviewed for management of rheumatoid arthritis. Disease activity remains well controlled on current DMARD therapy. DAS28 score 2.4 indicating remission. Continue current medications. Annual monitoring bloods satisfactory.",
             diagnoses: [
-                { id: 1, name: "Rheumatoid arthritis - in remission", status: "changed", icd10: "M06.9", currentRecord: "Rheumatoid arthritis" }
+                { id: 1, name: "Rheumatoid arthritis - in remission", type: "condition", status: "changed", icd10: "M06.9", currentRecord: "Rheumatoid arthritis" }
             ],
             medications: [
                 { id: 1, name: "Methotrexate", dose: "20mg", frequency: "weekly", status: "unchanged", currentRecord: "Methotrexate 20mg weekly" },
@@ -153,7 +155,7 @@ const mockLetters = [
         extractedData: {
             summary: "Mrs. Nguyen reviewed in Memory Clinic. Cognitive testing reveals mild cognitive impairment, likely early Alzheimer's disease. MRI shows mild hippocampal atrophy. Commenced on cholinesterase inhibitor therapy. Family meeting held to discuss diagnosis and advance care planning.",
             diagnoses: [
-                { id: 1, name: "Mild cognitive impairment due to Alzheimer's disease", status: "new", icd10: "G31.84", currentRecord: null }
+                { id: 1, name: "Mild cognitive impairment due to Alzheimer's disease", type: "condition", status: "new", icd10: "G31.84", currentRecord: null }
             ],
             medications: [
                 { id: 1, name: "Donepezil", dose: "5mg", frequency: "nocte", status: "new", note: "Increase to 10mg after 4 weeks if tolerated", currentRecord: null },
@@ -186,8 +188,8 @@ const mockLetters = [
         extractedData: {
             summary: "Ms. Patel attended for routine antenatal care at 28 weeks gestation. Pregnancy progressing normally. Oral glucose tolerance test shows gestational diabetes. Commenced on dietary management with home glucose monitoring. Referral to diabetes educator completed.",
             diagnoses: [
-                { id: 1, name: "Gestational diabetes mellitus", status: "new", icd10: "O24.4", currentRecord: null },
-                { id: 2, name: "Pregnancy - 28 weeks", status: "changed", icd10: "Z34.0", currentRecord: "Pregnancy - 20 weeks (confirmed 11/11/2025)" }
+                { id: 1, name: "Gestational diabetes mellitus", type: "condition", status: "new", icd10: "O24.4", currentRecord: null },
+                { id: 2, name: "Pregnancy - 28 weeks", type: "condition", status: "changed", icd10: "Z34.0", currentRecord: "Pregnancy - 20 weeks (confirmed 11/11/2025)" }
             ],
             medications: [],
             measurements: [
@@ -219,8 +221,8 @@ const mockLetters = [
         extractedData: {
             summary: "Mr. Thompson underwent elective right total hip replacement on 6 January 2026 for severe osteoarthritis. Surgery was uncomplicated with Stryker implants. Mobilising well with frame, discharged day 3. Requires VTE prophylaxis for 35 days and posterior hip precautions for 6 weeks.",
             diagnoses: [
-                { id: 1, name: "Right total hip replacement - post-operative", status: "new", icd10: "Z96.64", currentRecord: null },
-                { id: 2, name: "Right hip osteoarthritis - severe", status: "changed", icd10: "M16.11", currentRecord: "Right hip osteoarthritis" }
+                { id: 1, name: "Right total hip replacement", type: "procedure", status: "new", icd10: "Z96.64", currentRecord: null },
+                { id: 2, name: "Right hip osteoarthritis - severe", type: "condition", status: "changed", icd10: "M16.11", currentRecord: "Right hip osteoarthritis" }
             ],
             medications: [
                 { id: 1, name: "Aspirin", dose: "150mg", frequency: "daily", status: "new", note: "VTE prophylaxis - 35 days total", currentRecord: null },
@@ -254,8 +256,8 @@ const mockLetters = [
         extractedData: {
             summary: "Mr. Papadopoulos underwent TURP on 5 January for BPH with severe LUTS (IPSS 24). 45g tissue resected, histopathology confirmed BPH with no malignancy. Successful trial of void on day 2. Alpha-blocker and 5-ARI therapy ceased as no longer required post-TURP.",
             diagnoses: [
-                { id: 1, name: "Benign prostatic hyperplasia - post TURP", status: "changed", icd10: "N40.1", currentRecord: "Benign prostatic hyperplasia" },
-                { id: 2, name: "TURP - transurethral resection of prostate", status: "new", icd10: "Z87.438", currentRecord: null }
+                { id: 1, name: "Benign prostatic hyperplasia - post TURP", type: "condition", status: "changed", icd10: "N40.1", currentRecord: "Benign prostatic hyperplasia" },
+                { id: 2, name: "Transurethral resection of prostate (TURP)", type: "procedure", status: "new", icd10: "Z87.438", currentRecord: null }
             ],
             medications: [
                 { id: 1, name: "Trimethoprim", dose: "300mg", frequency: "nocte", status: "new", note: "Prophylactic - 7 days only", currentRecord: null },
@@ -288,8 +290,9 @@ const mockLetters = [
         extractedData: {
             summary: "Mrs. O'Brien underwent uncomplicated left cataract surgery (phacoemulsification + IOL) today. Pre-op vision L 6/36, Alcon SN60WF +21.5D lens inserted targeting plano. Post-operative drop regimen dispensed. Day 1 review tomorrow, driving restriction until reviewed.",
             diagnoses: [
-                { id: 1, name: "Left cataract - post phacoemulsification", status: "changed", icd10: "H25.9", currentRecord: "Left cataract (nuclear sclerotic)" },
-                { id: 2, name: "Pseudophakia left eye", status: "new", icd10: "Z96.1", currentRecord: null }
+                { id: 1, name: "Phacoemulsification and IOL insertion (left eye)", type: "procedure", status: "new", icd10: "Z96.1", currentRecord: null },
+                { id: 2, name: "Left cataract - resolved", type: "condition", status: "changed", icd10: "H25.9", currentRecord: "Left cataract (nuclear sclerotic)" },
+                { id: 3, name: "Pseudophakia left eye", type: "condition", status: "new", icd10: "Z96.1", currentRecord: null }
             ],
             medications: [
                 { id: 1, name: "Chloramphenicol 0.5% eye drops", dose: "1 drop LEFT eye", frequency: "QID", status: "new", note: "For 2 weeks", currentRecord: null },

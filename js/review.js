@@ -2,6 +2,7 @@
 
 let currentLetter = null;
 let itemStates = {}; // Track accepted/rejected state for each item
+let historyStates = {}; // Track active/inactive state for diagnoses (only applies when accepted)
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeReviewPage();
@@ -47,9 +48,22 @@ function initializeItemStates() {
         reminders: {}
     };
 
+    // Initialize history states for diagnoses (active/inactive)
+    historyStates = {
+        diagnoses: {}
+    };
+
     // Initialize each item
     const data = currentLetter.extractedData;
-    data.diagnoses.forEach(d => itemStates.diagnoses[d.id] = 'pending');
+
+    // For diagnoses: procedures are pre-accepted and default to inactive
+    // Other diagnoses start pending and default to active when accepted
+    data.diagnoses.forEach(d => {
+        const isProcedure = d.type === 'procedure';
+        itemStates.diagnoses[d.id] = isProcedure ? 'accepted' : 'pending';
+        historyStates.diagnoses[d.id] = isProcedure ? 'inactive' : 'active';
+    });
+
     data.medications.forEach(m => itemStates.medications[m.id] = 'pending');
     data.measurements.forEach(m => itemStates.measurements[m.id] = 'pending');
     data.allergies.forEach(a => itemStates.allergies[a.id] = 'pending');
@@ -103,17 +117,24 @@ function renderDiagnoses(diagnoses) {
     const container = document.getElementById('diagnoses-list');
 
     if (diagnoses.length === 0) {
-        container.innerHTML = '<p class="empty-message">No diagnoses extracted</p>';
+        container.innerHTML = '<p class="empty-message">No items extracted</p>';
         return;
     }
 
-    container.innerHTML = diagnoses.map(d => `
-        <div class="data-item" data-type="diagnoses" data-id="${d.id}">
+    container.innerHTML = diagnoses.map(d => {
+        const isProcedure = d.type === 'procedure';
+        const state = itemStates.diagnoses[d.id];
+        const historyState = historyStates.diagnoses[d.id];
+        const isAccepted = state === 'accepted';
+        const isRejected = state === 'rejected';
+
+        return `
+        <div class="data-item ${isAccepted ? 'accepted' : ''} ${isRejected ? 'rejected' : ''}" data-type="diagnoses" data-id="${d.id}">
             <div class="item-status">
-                <button class="action-btn accept" onclick="toggleItemState('diagnoses', ${d.id}, 'accepted')" title="Accept">
+                <button class="action-btn accept ${isAccepted ? 'active' : ''}" onclick="toggleItemState('diagnoses', ${d.id}, 'accepted')" title="Accept">
                     <span class="icon">✓</span>
                 </button>
-                <button class="action-btn reject" onclick="toggleItemState('diagnoses', ${d.id}, 'rejected')" title="Reject">
+                <button class="action-btn reject ${isRejected ? 'active' : ''}" onclick="toggleItemState('diagnoses', ${d.id}, 'rejected')" title="Reject">
                     <span class="icon">✕</span>
                 </button>
             </div>
@@ -127,16 +148,42 @@ function renderDiagnoses(diagnoses) {
                     <span class="record-label">${d.currentRecord ? 'Proposed:' : ''}</span>
                     <span class="item-label">
                         ${d.name}
-                        <span class="item-tag ${d.status}">${d.status}</span>
+                        <span class="item-tag ${d.type === 'procedure' ? 'procedure' : d.status}">${d.type === 'procedure' ? 'procedure' : d.status}</span>
                     </span>
                 </div>
                 <div class="item-value">ICD-10: ${d.icd10}</div>
+
+                <!-- Active/Inactive Toggle - shown when accepted -->
+                <div class="history-toggle ${isAccepted ? 'visible' : ''}" data-diagnosis-id="${d.id}">
+                    <span class="toggle-label">Add to:</span>
+                    <div class="toggle-buttons">
+                        <button class="toggle-btn ${historyState === 'active' ? 'active' : ''}" onclick="setHistoryState(${d.id}, 'active')">
+                            Active
+                        </button>
+                        <button class="toggle-btn ${historyState === 'inactive' ? 'active' : ''}" onclick="setHistoryState(${d.id}, 'inactive')">
+                            Inactive
+                        </button>
+                    </div>
+                </div>
+
                 <div class="item-edit">
-                    <input type="text" value="${d.name}" placeholder="Edit diagnosis name">
+                    <input type="text" value="${d.name}" placeholder="Edit item name">
                 </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
+}
+
+function setHistoryState(diagnosisId, state) {
+    historyStates.diagnoses[diagnosisId] = state;
+
+    // Update toggle button UI
+    const toggleContainer = document.querySelector(`.history-toggle[data-diagnosis-id="${diagnosisId}"]`);
+    if (toggleContainer) {
+        toggleContainer.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = toggleContainer.querySelector(`.toggle-btn:${state === 'active' ? 'first-child' : 'last-child'}`);
+        if (activeBtn) activeBtn.classList.add('active');
+    }
 }
 
 function renderMedications(medications) {
@@ -323,6 +370,18 @@ function updateItemUI(type, id) {
     } else if (state === 'rejected') {
         item.classList.add('rejected');
         rejectBtn.classList.add('active');
+    }
+
+    // For diagnoses, show/hide the history toggle based on accepted state
+    if (type === 'diagnoses') {
+        const historyToggle = item.querySelector('.history-toggle');
+        if (historyToggle) {
+            if (state === 'accepted') {
+                historyToggle.classList.add('visible');
+            } else {
+                historyToggle.classList.remove('visible');
+            }
+        }
     }
 }
 

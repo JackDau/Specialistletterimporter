@@ -773,6 +773,62 @@ body {
     color: var(--neutral-600);
 }
 
+.item-tag.procedure {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+/* Active/Inactive History Toggle */
+.history-toggle {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background: var(--neutral-50);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--neutral-200);
+}
+
+.history-toggle.visible {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.toggle-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--neutral-600);
+    text-transform: uppercase;
+}
+
+.toggle-buttons {
+    display: flex;
+    gap: 4px;
+}
+
+.toggle-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--neutral-300);
+    background: var(--white);
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--neutral-600);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.toggle-btn:hover {
+    background: var(--neutral-50);
+    border-color: var(--neutral-400);
+}
+
+.toggle-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .review-container {
